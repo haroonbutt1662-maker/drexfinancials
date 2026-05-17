@@ -12,10 +12,33 @@ const contactInfo = [
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [fields, setFields] = useState({ name: "", company: "", email: "", message: "" });
 
-  function handleSubmit(e: FormEvent) {
+  function set(key: keyof typeof fields) {
+    return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setFields((f) => ({ ...f, [key]: e.target.value }));
+  }
+
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fields),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Something went wrong.");
+      setSubmitted(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -110,12 +133,7 @@ export default function Contact() {
 
               {submitted ? (
                 <div className="text-center py-10">
-                  <div
-                    className="text-[3rem] mb-4"
-                    style={{ color: "var(--champagne)" }}
-                  >
-                    ✓
-                  </div>
+                  <div className="text-[3rem] mb-4" style={{ color: "var(--champagne)" }}>✓</div>
                   <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,.85)" }}>
                     Thank you! We'll be in touch within one business day.
                   </p>
@@ -123,11 +141,11 @@ export default function Contact() {
               ) : (
                 <form onSubmit={handleSubmit}>
                   {[
-                    { label: "Name", type: "text", placeholder: "Your full name", name: "name" },
-                    { label: "Company", type: "text", placeholder: "Where you work", name: "company" },
-                    { label: "Email", type: "email", placeholder: "you@business.com", name: "email" },
+                    { label: "Name", type: "text", placeholder: "Your full name", key: "name" as const },
+                    { label: "Company", type: "text", placeholder: "Where you work", key: "company" as const },
+                    { label: "Email", type: "email", placeholder: "you@business.com", key: "email" as const },
                   ].map((field) => (
-                    <div key={field.name} className="mb-[18px]">
+                    <div key={field.key} className="mb-[18px]">
                       <label
                         className="block mb-2"
                         style={{
@@ -142,8 +160,10 @@ export default function Contact() {
                       </label>
                       <input
                         type={field.type}
-                        name={field.name}
                         placeholder={field.placeholder}
+                        value={fields[field.key]}
+                        onChange={set(field.key)}
+                        required={field.key === "name" || field.key === "email"}
                         className="w-full bg-transparent outline-none py-2 transition-colors duration-300"
                         style={{
                           border: "none",
@@ -171,9 +191,10 @@ export default function Contact() {
                       What you'd like to discuss
                     </label>
                     <textarea
-                      name="message"
                       placeholder="A few lines about your business and where you'd like more clarity"
                       rows={3}
+                      value={fields.message}
+                      onChange={set("message")}
                       className="w-full bg-transparent outline-none py-2 resize-none transition-colors duration-300"
                       style={{
                         border: "none",
@@ -187,11 +208,20 @@ export default function Contact() {
                       onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(255,255,255,.18)")}
                     />
                   </div>
+
+                  {error && (
+                    <p className="mb-4 text-[0.85rem]" style={{ color: "#f87171" }}>
+                      {error}
+                    </p>
+                  )}
+
                   <button
                     type="submit"
+                    disabled={loading}
                     className="btn btn-primary w-full justify-center mt-2"
+                    style={{ opacity: loading ? 0.7 : 1 }}
                   >
-                    Request consultation
+                    {loading ? "Sending…" : "Request consultation"}
                   </button>
                 </form>
               )}
