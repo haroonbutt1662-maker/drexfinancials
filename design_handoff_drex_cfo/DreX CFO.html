@@ -1,0 +1,1252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DreX CFO — Smarter Finances. Automated Insights.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy-900:#06152E;
+    --navy-800:#0B1E3F;
+    --navy-700:#102A56;
+    --navy-600:#1A3563;
+    --navy-500:#244680;
+    --blue-400:#4A7FB8;
+    --blue-200:#9DB8D8;
+    --champagne:#D4A574;
+    --champagne-soft:#E6C8A0;
+    --cream:#F5F1EA;
+    --paper:#FBFAF7;
+    --ink:#0B1E3F;
+    --muted:#5C6E89;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    font-weight:400;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .serif{font-family:'Instrument Serif',serif;font-weight:400;letter-spacing:-0.01em}
+  .sans-display{font-family:'Manrope',sans-serif;font-weight:600;letter-spacing:-0.035em;line-height:1}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne)}
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--champagne)}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 28px;border-radius:999px;
+    font-family:'Manrope',sans-serif;font-weight:500;font-size:.92rem;
+    letter-spacing:.02em;cursor:pointer;border:1px solid transparent;
+    transition:all .35s cubic-bezier(.2,.7,.2,1);text-decoration:none;
+  }
+  .btn-primary{background:var(--champagne);color:var(--navy-900)}
+  .btn-primary:hover{background:var(--champagne-soft);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--paper);border-color:rgba(255,255,255,.25)}
+  .btn-ghost:hover{border-color:var(--champagne);color:var(--champagne)}
+  .btn-dark{background:var(--navy-800);color:var(--paper)}
+  .btn-dark:hover{background:var(--navy-700)}
+  .arrow{width:14px;height:14px}
+
+  /* ---------- NAV ---------- */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 0;transition:all .4s ease}
+  .nav.scrolled{background:rgba(11,30,63,.88);backdrop-filter:blur(16px);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .logo{display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
+  .logo-mark{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--champagne),var(--champagne-soft));display:grid;place-items:center;color:var(--navy-900);font-family:'Instrument Serif',serif;font-size:1.2rem;font-style:italic}
+  .logo-text{font-family:'Manrope',sans-serif;font-size:1.1rem;font-weight:600;letter-spacing:-.01em}
+  .logo-text em{font-style:normal;color:var(--champagne);font-weight:700}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{color:rgba(255,255,255,.78);text-decoration:none;font-size:.88rem;letter-spacing:.02em;transition:color .3s}
+  .nav-links a:hover{color:var(--champagne)}
+  .nav-cta{padding:10px 20px;border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:.85rem;color:var(--paper);text-decoration:none;transition:all .3s}
+  .nav-cta:hover{background:var(--champagne);color:var(--navy-900);border-color:var(--champagne)}
+  @media(max-width:780px){.nav-links a:not(.nav-cta){display:none}}
+
+  /* ---------- HERO SHELL ---------- */
+  .hero{position:relative;min-height:100vh;background:var(--navy-900);color:var(--paper);overflow:hidden;display:flex;align-items:center}
+  .hero-variant{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;pointer-events:none;display:flex;align-items:center}
+  .hero-variant.active{opacity:1;pointer-events:auto}
+  .hero-switcher{
+    position:absolute;top:96px;right:32px;
+    z-index:30;display:flex;gap:6px;
+    background:rgba(6,21,46,.55);backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:5px;
+  }
+  .hero-switcher button{
+    background:transparent;border:0;color:rgba(255,255,255,.55);
+    font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
+    padding:8px 12px;border-radius:999px;cursor:pointer;transition:all .3s
+  }
+  .hero-switcher button.active{background:var(--champagne);color:var(--navy-900)}
+  .hero-switcher button:hover:not(.active){color:var(--paper)}
+  @media(max-width:780px){.hero-switcher{top:auto;bottom:24px;right:50%;transform:translateX(50%)}}
+
+  /* Hero stats strip */
+  .hero-stats{position:absolute;left:0;right:0;bottom:42px;z-index:8;display:flex;justify-content:center;padding:0 24px;pointer-events:none}
+  .hero-stats-inner{display:flex;align-items:center;padding:20px 12px;background:rgba(6,21,46,.5);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:999px;pointer-events:auto}
+  .hero-stat{padding:6px 36px;text-align:center;position:relative;display:flex;flex-direction:column;align-items:center}
+  .hero-stat + .hero-stat::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:1px;background:rgba(255,255,255,.14)}
+  .hero-stat .num{font-family:'Manrope',sans-serif;font-weight:600;font-size:2rem;letter-spacing:-.03em;color:var(--champagne);line-height:1}
+  .hero-stat .lbl{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.78);margin-top:10px;white-space:nowrap}
+  @media(max-width:780px){.hero-stats{display:none}}
+
+  .hero-content{position:relative;z-index:5;max-width:1280px;margin:0 auto;padding:0 32px;width:100%}
+  .hero-tag{display:inline-flex;align-items:center;gap:12px;padding:8px 16px;border-radius:999px;background:rgba(212,165,116,.12);border:1px solid rgba(212,165,116,.25);color:var(--champagne-soft);font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:32px}
+  .hero-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--champagne);box-shadow:0 0 12px var(--champagne);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero h1{font-family:'Manrope',sans-serif;font-weight:600;font-size:clamp(2.6rem,5.8vw,5.2rem);line-height:1.02;letter-spacing:-.04em;margin-bottom:28px;max-width:16ch}
+  .hero h1 em{font-style:normal;color:var(--champagne);font-weight:600}
+  .hero p.lead{font-size:1.05rem;line-height:1.65;max-width:540px;color:rgba(255,255,255,.78);margin-bottom:40px;font-weight:300}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+
+  /* Variant 1 — VIDEO BG */
+  .hv-video .bg{position:absolute;inset:0;overflow:hidden;background:#06152E}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hv-video .bg::after{content:"";position:absolute;inset:0;background:
+    radial-gradient(ellipse 70% 80% at 30% 50%,rgba(6,21,46,.9),rgba(6,21,46,.75) 50%,rgba(6,21,46,.6) 100%),
+    linear-gradient(180deg,rgba(6,21,46,.65) 0%,rgba(11,30,63,.55) 35%,rgba(6,21,46,.95) 100%),
+    linear-gradient(110deg,rgba(11,30,63,.55) 0%,rgba(6,21,46,.78) 100%);
+  }
+  .hv-video .vignette{position:absolute;inset:0;box-shadow:inset 0 -220px 240px rgba(6,21,46,.95),inset 0 0 180px rgba(6,21,46,.7);pointer-events:none}
+  .hv-video .data-particles{position:absolute;inset:0;pointer-events:none}
+  .particle{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--champagne);box-shadow:0 0 10px var(--champagne);opacity:.7;animation:rise 14s linear infinite}
+  @keyframes rise{0%{transform:translateY(100vh) translateX(0);opacity:0}10%{opacity:.8}90%{opacity:.6}100%{transform:translateY(-10vh) translateX(40px);opacity:0}}
+
+  /* Variant 2 — DATA VIS */
+  .hv-data .bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,#1A3563 0%,#06152E 70%)}
+  .hv-data .hero-content{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .hv-data h1,.hv-editorial h1,.hv-orbs h1{font-family:'Manrope',sans-serif;font-weight:600;letter-spacing:-.04em}
+  .hv-data h1 em,.hv-editorial h1 em,.hv-orbs h1 em{font-style:normal;color:var(--champagne)}
+  @media(max-width:980px){.hv-data .hero-content{grid-template-columns:1fr}}
+  .data-stage{position:relative;height:480px}
+  .chart-card{
+    position:absolute;background:rgba(255,255,255,.04);backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:20px;
+    box-shadow:0 30px 80px rgba(0,0,0,.4);
+  }
+  .chart-card.c1{top:0;left:0;width:62%;height:260px;animation:floatA 6s ease-in-out infinite}
+  .chart-card.c2{top:160px;right:0;width:48%;height:200px;animation:floatA 6s ease-in-out infinite -2s}
+  .chart-card.c3{bottom:0;left:18%;width:54%;height:160px;animation:floatA 6s ease-in-out infinite -4s}
+  @keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+  .card-head .tag{padding:3px 8px;border-radius:999px;background:rgba(74,127,184,.2);color:var(--blue-200)}
+  .card-head .up{color:#7DD3A8}
+  .big-num{font-family:'Manrope',sans-serif;font-weight:600;letter-spacing:-.03em;font-size:2rem;color:var(--paper);margin-bottom:4px}
+  .sm-num{font-family:'Manrope',sans-serif;font-weight:600;letter-spacing:-.03em;font-size:1.4rem;color:var(--paper)}
+  .bars{display:flex;gap:6px;align-items:flex-end;height:80px;margin-top:12px}
+  .bars span{flex:1;background:linear-gradient(180deg,var(--blue-400),var(--navy-500));border-radius:3px 3px 0 0;animation:grow 1.4s ease both}
+  @keyframes grow{from{height:0}}
+  .spark{margin-top:10px;height:60px}
+  .donut{width:90px;height:90px;border-radius:50%;background:conic-gradient(var(--champagne) 0 68%,rgba(255,255,255,.1) 0);display:grid;place-items:center;margin-left:auto}
+  .donut::after{content:"68%";width:64px;height:64px;border-radius:50%;background:var(--navy-800);display:grid;place-items:center;font-family:'Manrope',sans-serif;font-weight:600;font-size:.95rem;color:var(--paper)}
+
+  /* Variant 3 — EDITORIAL */
+  .hv-editorial .bg{position:absolute;inset:0;background:linear-gradient(180deg,#06152E 0%,#0B1E3F 100%)}
+  .hv-editorial .hero-content{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center}
+  @media(max-width:980px){.hv-editorial .hero-content{grid-template-columns:1fr}}
+  .portrait-wrap{position:relative}
+  .portrait{
+    aspect-ratio:3/4;border-radius:280px 280px 24px 24px;
+    background:
+      linear-gradient(180deg,rgba(11,30,63,0) 50%,rgba(11,30,63,.6) 100%),
+      repeating-linear-gradient(45deg,#1A3563,#1A3563 20px,#244680 20px,#244680 40px);
+    position:relative;overflow:hidden;
+    box-shadow:0 40px 100px rgba(0,0,0,.5);
+  }
+  .portrait::before{
+    content:"FOUNDER PORTRAIT";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:rgba(255,255,255,.4)
+  }
+  .portrait-badge{
+    position:absolute;bottom:-20px;right:-20px;width:140px;height:140px;border-radius:50%;
+    background:var(--champagne);color:var(--navy-900);display:grid;place-items:center;text-align:center;
+    font-family:'Manrope',sans-serif;font-weight:600;font-size:.82rem;line-height:1.25;padding:20px;letter-spacing:-.01em;
+    animation:spin 30s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .portrait-badge span{display:block;font-family:'Manrope',sans-serif;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;margin-top:6px}
+
+  /* Variant 4 — TYPOGRAPHIC ORBS */
+  .hv-orbs .bg{position:absolute;inset:0;background:#06152E;overflow:hidden}
+  .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.6}
+  .orb.o1{width:600px;height:600px;background:#244680;top:-100px;left:-100px;animation:driftA 18s ease-in-out infinite}
+  .orb.o2{width:500px;height:500px;background:#1A3563;bottom:-150px;right:-100px;animation:driftA 20s ease-in-out infinite -6s}
+  .orb.o3{width:350px;height:350px;background:rgba(212,165,116,.4);top:30%;right:25%;animation:driftA 14s ease-in-out infinite -3s}
+  @keyframes driftA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,-40px) scale(1.1)}}
+  .hv-orbs h1{font-size:clamp(3.2rem,8vw,7.5rem);max-width:none}
+  .hv-orbs .hero-content{text-align:center;max-width:1100px}
+  .hv-orbs .hero-tag,.hv-orbs .hero-actions{justify-content:center}
+  .hv-orbs .hero-actions{display:inline-flex}
+  .hv-orbs p.lead{margin-left:auto;margin-right:auto;text-align:center}
+  .marquee{position:absolute;bottom:150px;left:0;right:0;overflow:hidden;mask-image:linear-gradient(90deg,transparent,black 15%,black 85%,transparent);opacity:.4}
+  .marquee-track{display:flex;gap:60px;font-family:'Instrument Serif',serif;font-size:3rem;font-style:italic;color:var(--blue-200);white-space:nowrap;animation:slide 30s linear infinite}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* ---------- CURVED DIVIDER ---------- */
+  .divider{display:block;width:100%;height:32px;margin-top:-1px;margin-bottom:-1px;line-height:0}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--paper);padding:140px 0 0;position:relative}
+  .about-head{max-width:880px;margin-bottom:72px}
+  .about-body{display:grid;grid-template-columns:1.4fr 1fr;gap:80px;align-items:start}
+  @media(max-width:900px){.about-body{grid-template-columns:1fr;gap:48px}}
+  .section-title{font-family:'Manrope',sans-serif;font-weight:600;font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.05;letter-spacing:-.035em;margin:18px 0 24px;color:var(--navy-900)}
+  .section-title em{font-style:normal;color:var(--navy-500);font-weight:500}
+  .section-intro{color:var(--muted);font-size:1.02rem;line-height:1.7;max-width:560px}
+
+  .about-story p{margin-bottom:20px;color:var(--navy-700);font-size:1rem;line-height:1.75}
+  .about-story p.first::first-letter{font-family:'Manrope',sans-serif;font-weight:600;font-size:3.6rem;float:left;line-height:.85;padding:8px 14px 0 0;color:var(--champagne);letter-spacing:-.04em}
+
+  .about-facts{display:grid;gap:0;background:var(--cream);border-radius:24px;padding:6px;border:1px solid rgba(11,30,63,.05);position:sticky;top:120px}
+  .fact-block{padding:20px 22px;border-bottom:1px solid rgba(11,30,63,.06);position:relative}
+  .fact-block:last-child{border-bottom:0}
+  .fact-block .mono{display:block;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .fact-block strong{display:block;font-family:'Manrope',sans-serif;font-weight:600;font-size:.98rem;color:var(--navy-900);letter-spacing:-.01em;line-height:1.35}
+  .fact-block small{display:block;font-size:.8rem;color:var(--muted);margin-top:6px;line-height:1.5;font-weight:400}
+  .fact-block.highlight{background:var(--paper);border-radius:18px;margin:6px 0;border:1px solid rgba(212,165,116,.45);box-shadow:0 8px 24px rgba(212,165,116,.08)}
+  .fact-block.highlight .mono{color:var(--champagne)}
+
+  /* Pull quote */
+  .pullquote-wrap{padding:140px 0 100px;background:var(--paper);position:relative;overflow:hidden}
+  .pullquote-wrap::before{content:"";position:absolute;top:50%;left:50%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(212,165,116,.08),transparent 60%);transform:translate(-50%,-50%);pointer-events:none}
+  .pullquote-wrap::after{content:"";position:absolute;top:50%;left:50%;width:760px;height:760px;border-radius:50%;border:1px dashed rgba(212,165,116,.18);transform:translate(-50%,-50%);pointer-events:none;animation:spinSlow 120s linear infinite}
+  .pullquote{position:relative;max-width:1040px;margin:0 auto;padding:0 60px;text-align:center}
+  .pq-top{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:32px;position:relative}
+  .pq-rule{width:60px;height:1px;background:rgba(11,30,63,.18)}
+  .pq-mono{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--champagne)}
+  .pullquote .qmark{display:block;font-family:'Instrument Serif',serif;font-size:7rem;line-height:.5;color:var(--champagne);margin-bottom:20px;opacity:.8}
+  .pq-text{font-family:'Manrope',sans-serif;font-weight:400;font-size:clamp(1.5rem,2.8vw,2.4rem);line-height:1.3;letter-spacing:-.02em;color:var(--navy-900);margin:0 auto;max-width:20ch}
+  .pq-text em{font-style:normal;color:var(--champagne);font-weight:500}
+  .pq-author{margin:40px auto 0;display:inline-flex;align-items:center;gap:18px}
+  .pq-line{width:60px;height:1px;background:var(--navy-500)}
+  .pq-name{font-family:'Manrope',sans-serif;font-weight:600;color:var(--navy-900);font-size:1rem;text-align:left}
+  .pq-role{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:4px;text-align:left}
+  .pq-creds{margin-top:36px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);position:relative}
+  .pq-creds > span.dot{color:rgba(11,30,63,.18)}
+  .pq-creds > span:not(.dot){padding:6px 12px;border:1px solid rgba(11,30,63,.1);border-radius:999px;background:rgba(212,165,116,.06)}
+
+  /* Principles - editorial column layout */
+  .principles-section{padding:60px 0 140px;background:var(--paper)}
+  .principles-head{max-width:700px;margin:0 auto 56px;text-align:center}
+  .principles-head .eyebrow{justify-content:center}
+  .principles-head .eyebrow::after{content:"";width:24px;height:1px;background:var(--champagne)}
+  .principles-title{font-family:'Manrope',sans-serif;font-weight:600;font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;letter-spacing:-.03em;color:var(--navy-900);margin-top:14px}
+  .principles-title em{font-style:normal;color:var(--champagne);font-weight:500}
+
+  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-radius:32px;overflow:hidden;background:var(--paper);border:1px solid rgba(11,30,63,.08)}
+  @media(max-width:780px){.principles{grid-template-columns:1fr}}
+  .principle{padding:56px 36px 40px;color:var(--navy-900);position:relative;border-right:1px solid rgba(11,30,63,.06);overflow:hidden;background:var(--paper);transition:background .4s ease}
+  .principle:nth-child(2){background:var(--cream)}
+  .principle:last-child{border-right:0}
+  @media(max-width:780px){.principle{border-right:0;border-bottom:1px solid rgba(11,30,63,.06)}.principle:last-child{border-bottom:0}}
+  .principle:hover{background:#FFF6E8}
+  .principle:nth-child(2):hover{background:#F0E8D6}
+  .watermark{position:absolute;top:-36px;right:-12px;font-family:'Manrope',sans-serif;font-weight:700;font-size:11rem;letter-spacing:-.05em;color:rgba(11,30,63,.045);line-height:1;pointer-events:none;user-select:none}
+  .principle:nth-child(2) .watermark{color:rgba(11,30,63,.06)}
+  .p-mark{margin-bottom:28px;position:relative;z-index:2;height:24px;display:flex;align-items:center;gap:10px}
+  .dot-mark{display:inline-block;background:var(--navy-800)}
+  .dot-mark.dot-circle{width:18px;height:18px;border-radius:50%}
+  .dot-mark.dot-diamond{width:14px;height:14px;transform:rotate(45deg)}
+  .dot-mark.dot-square{width:16px;height:16px;border-radius:3px}
+  .p-mark .line{flex:1;height:1px;background:rgba(11,30,63,.12);max-width:60px}
+  .p-eyebrow{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--champagne);margin-bottom:14px;position:relative;z-index:2}
+  .principle h4{font-family:'Manrope',sans-serif;font-weight:600;font-size:1.35rem;line-height:1.2;letter-spacing:-.025em;margin-bottom:14px;position:relative;z-index:2;color:var(--navy-900)}
+  .principle p{font-size:.94rem;color:var(--muted);line-height:1.65;position:relative;z-index:2;margin-bottom:28px}
+  .p-tagline{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.12em;color:var(--navy-500);padding-top:18px;border-top:1px solid rgba(11,30,63,.08);position:relative;z-index:2;text-transform:uppercase}
+
+  /* ---------- SERVICES (orbital) ---------- */
+  .services{background:var(--navy-900);color:var(--paper);padding:140px 0 140px;position:relative;overflow:hidden}
+  .services::before{content:"";position:absolute;top:10%;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(74,127,184,.08),transparent 70%);pointer-events:none}
+  .services::after{content:"";position:absolute;bottom:-300px;left:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(212,165,116,.04),transparent 65%);pointer-events:none}
+  .services .section-title{color:var(--paper)}
+  .services .section-title em{color:var(--champagne)}
+  .services .section-intro{color:rgba(255,255,255,.65)}
+  .services-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:60px;position:relative;z-index:5}
+  @media(max-width:780px){.services-head{grid-template-columns:1fr}}
+
+  .orbit{position:relative;width:100%;max-width:1100px;margin:40px auto 0;aspect-ratio:1.15/1;min-height:680px}
+  /* Radial glow emanating from the centre */
+  .orbit::before{content:"";position:absolute;top:50%;left:50%;width:200%;height:170%;transform:translate(-50%,-50%);background:
+    radial-gradient(circle 220px at center,rgba(229,200,160,.55) 0%,rgba(212,165,116,.28) 40%,rgba(212,165,116,0) 75%),
+    radial-gradient(ellipse 55% 60% at center,rgba(74,127,184,.22) 0%,rgba(36,70,128,.12) 35%,rgba(11,30,63,0) 65%);
+    pointer-events:none;z-index:0;animation:glowPulse 7s ease-in-out infinite;will-change:opacity}
+  @keyframes glowPulse{0%,100%{opacity:1}50%{opacity:.78}}
+  @media(max-width:900px){.orbit{aspect-ratio:auto;min-height:auto;display:flex;flex-direction:column;gap:16px;max-width:600px}.orbit::before{display:none}}
+  .orbit-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+  @media(max-width:900px){.orbit-svg{display:none}}
+
+  .orbit-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--navy-700) 0%,var(--navy-900) 70%);border:1px solid rgba(212,165,116,.35);display:grid;place-items:center;text-align:center;box-shadow:0 30px 80px rgba(6,21,46,.7),inset 0 0 60px rgba(212,165,116,.08);z-index:3}
+  .orbit-core::before{content:"";position:absolute;inset:-16px;border-radius:50%;border:1px dashed rgba(212,165,116,.3);animation:spinSlow 60s linear infinite}
+  .orbit-core::after{content:"";position:absolute;inset:-48px;border-radius:50%;border:1px solid rgba(212,165,116,.08);animation:spinSlow 120s linear infinite reverse}
+  @keyframes spinSlow{to{transform:rotate(360deg)}}
+  @media(max-width:900px){.orbit-core{position:relative;top:auto;left:auto;transform:none;margin:0 auto 16px;width:200px;height:200px}.orbit-core::before,.orbit-core::after{display:none}}
+  .orbit-core-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;z-index:2;padding:0 14px}
+  .orbit-core .mark{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--champagne),var(--champagne-soft));color:var(--navy-900);font-family:'Manrope',sans-serif;font-weight:600;font-size:1.9rem;display:grid;place-items:center;letter-spacing:-.04em;margin-bottom:4px}
+  .orbit-core .core-name{font-family:'Manrope',sans-serif;font-weight:600;font-size:1rem;letter-spacing:-.015em;color:var(--paper);white-space:nowrap}
+  .orbit-core .core-sub{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.22em;color:var(--champagne);text-transform:uppercase;white-space:nowrap;margin-top:2px}
+
+  .orbit-svc{position:absolute;width:250px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:22px 22px 20px;backdrop-filter:blur(8px);transition:background .4s ease,border-color .4s ease,box-shadow .4s ease;cursor:pointer;z-index:4;--y:0px;animation:floatY 5.5s ease-in-out infinite;will-change:transform}
+  @property --y{syntax:'<length>';inherits:false;initial-value:0px}
+  @keyframes floatY{0%,100%{--y:0px}50%{--y:-12px}}
+  .orbit-svc:hover{background:rgba(255,255,255,.08);border-color:rgba(212,165,116,.5);box-shadow:0 24px 60px rgba(0,0,0,.5);animation-play-state:paused}
+  .orbit-svc[data-pos="1"]{top:0;left:50%;transform:translate(-50%,var(--y));animation-delay:0s}
+  .orbit-svc[data-pos="2"]{top:30%;right:0;transform:translateY(var(--y));animation-delay:-1.1s}
+  .orbit-svc[data-pos="3"]{bottom:0;right:9%;transform:translateY(var(--y));animation-delay:-2.2s}
+  .orbit-svc[data-pos="4"]{bottom:0;left:9%;transform:translateY(var(--y));animation-delay:-3.3s}
+  .orbit-svc[data-pos="5"]{top:30%;left:0;transform:translateY(var(--y));animation-delay:-4.4s}
+  .orbit-svc .num{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.22em;color:var(--champagne);margin-bottom:10px;text-transform:uppercase}
+  .orbit-svc h3{font-family:'Manrope',sans-serif;font-weight:600;font-size:1.1rem;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2;color:var(--paper)}
+  .orbit-svc p{font-size:.82rem;color:rgba(255,255,255,.62);line-height:1.55}
+  @media(max-width:900px){
+    .orbit-svc{position:relative;top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;transform:none!important;width:100%;animation:none}
+    .orbit-svc:hover{transform:none!important}
+  }
+
+  /* ---------- HOW IT WORKS (row list, light) ---------- */
+  .process{background:var(--cream);padding:140px 0 120px;position:relative;overflow:hidden}
+  .process::before{content:"";position:absolute;top:10%;left:-200px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(11,30,63,.05),transparent 70%);pointer-events:none}
+  .process-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:60px}
+  @media(max-width:780px){.process-head{grid-template-columns:1fr}}
+  .proc-list{display:grid;gap:2px;background:rgba(11,30,63,.08);border-radius:24px;overflow:hidden;border:1px solid rgba(11,30,63,.06)}
+  .proc-row{background:var(--paper);padding:42px 36px;display:grid;grid-template-columns:80px 1.4fr 2fr auto;gap:36px;align-items:center;cursor:pointer;transition:background .4s ease}
+  .proc-row:hover{background:#FCFAEF}
+  @media(max-width:900px){.proc-row{grid-template-columns:1fr;gap:14px;padding:32px 28px}}
+  .proc-num{font-family:'Manrope',sans-serif;font-weight:500;font-size:1.5rem;color:var(--champagne);line-height:1;letter-spacing:-.02em}
+  .proc-name{font-family:'Manrope',sans-serif;font-weight:600;font-size:1.25rem;line-height:1.15;letter-spacing:-.025em;color:var(--navy-900)}
+  .proc-desc{color:var(--muted);font-size:.92rem;line-height:1.6}
+  .proc-arrow{width:46px;height:46px;border-radius:50%;border:1px solid rgba(11,30,63,.18);display:grid;place-items:center;color:var(--navy-700);transition:all .3s ease}
+  .proc-row:hover .proc-arrow{background:var(--navy-800);border-color:var(--navy-800);color:var(--champagne);transform:rotate(-45deg)}
+  @media(max-width:900px){.proc-arrow{display:none}}
+
+  /* ---------- WHY US ---------- */
+  .why{padding:140px 0 120px;background:var(--paper);position:relative}
+  .why-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;margin-top:60px}
+  @media(max-width:900px){.why-grid{grid-template-columns:1fr}}
+  .problem-card{padding:48px;background:linear-gradient(135deg,var(--navy-800),var(--navy-600));border-radius:32px;color:var(--paper);position:relative;overflow:hidden}
+  .problem-card h3{font-family:'Manrope',sans-serif;font-weight:600;font-size:1.6rem;line-height:1.2;margin-bottom:20px;letter-spacing:-.025em}
+  .problem-card p{color:rgba(255,255,255,.78);font-size:.98rem;line-height:1.7}
+  .problem-card .gap-vis{margin-top:32px;display:flex;align-items:center;gap:14px;padding:20px;background:rgba(0,0,0,.2);border-radius:16px}
+  .gap-side{flex:1;text-align:center}
+  .gap-side .mono{display:block;color:rgba(255,255,255,.5);margin-bottom:4px;font-size:.65rem}
+  .gap-side strong{font-family:'Manrope',sans-serif;font-weight:600;font-size:1rem;letter-spacing:-.01em}
+  .gap-bridge{padding:10px 16px;background:var(--champagne);color:var(--navy-900);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap}
+  .diff-list{display:grid;gap:14px}
+  .diff{padding:24px 28px;background:var(--cream);border-radius:20px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;transition:transform .3s ease}
+  .diff:hover{transform:translateX(6px)}
+  .diff-icon{width:48px;height:48px;border-radius:50%;background:var(--navy-800);color:var(--champagne);display:grid;place-items:center;font-family:'Manrope',sans-serif;font-weight:500;font-size:1.2rem}
+  .diff h4{font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;color:var(--navy-900);margin-bottom:4px;letter-spacing:-.015em}
+  .diff p{color:var(--muted);font-size:.9rem;line-height:1.55}
+
+  /* ---------- TESTIMONIALS (3-up carousel) ---------- */
+  .testi{background:linear-gradient(180deg,var(--navy-900),var(--navy-800));color:var(--paper);padding:140px 0 120px;position:relative;overflow:hidden}
+  .testi::before{content:"";position:absolute;top:15%;left:-150px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(74,127,184,.18),transparent 65%);pointer-events:none}
+  .testi::after{content:"";position:absolute;bottom:-200px;right:-100px;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(212,165,116,.08),transparent 60%);pointer-events:none}
+
+  .testi-frame{position:relative;margin-top:60px}
+
+  .testi-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+  .testi-meta .label-row{display:flex;align-items:center;gap:14px}
+  .testi-meta .mono{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--champagne)}
+  .testi-meta .mono-rule{width:36px;height:1px;background:rgba(212,165,116,.4)}
+  .testi-counter{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;color:rgba(255,255,255,.55)}
+  .testi-counter .cur{color:var(--paper);font-weight:600;font-size:.92rem;transition:opacity .35s ease}
+  .testi-counter .cur.flipping{opacity:0}
+
+  .carousel{position:relative;overflow:hidden;padding:4px 4px 6px;margin:0 -4px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 3%,#000 97%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 3%,#000 97%,transparent 100%)}
+  .carousel-track{display:flex;gap:20px;transition:transform .85s cubic-bezier(.22,.7,.2,1);will-change:transform}
+  .carousel-track.no-anim{transition:none}
+
+  .testi-card{flex:0 0 calc((100% - 40px) / 3);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:34px 30px;backdrop-filter:blur(8px);transition:background .4s ease,border-color .4s ease,transform .4s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;gap:14px;min-height:380px;box-sizing:border-box}
+  .testi-card:hover{background:rgba(255,255,255,.07);border-color:rgba(212,165,116,.4);transform:translateY(-4px)}
+  @media(max-width:1000px){.testi-card{flex:0 0 calc((100% - 20px) / 2)}}
+  @media(max-width:700px){.testi-card{flex:0 0 100%;min-height:340px}}
+
+  .testi-card .stars{color:var(--champagne);letter-spacing:.18em;font-size:.98rem;line-height:1}
+  .testi-card .label{display:inline-flex;align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--champagne);padding:5px 11px;background:rgba(212,165,116,.1);border:1px solid rgba(212,165,116,.25);border-radius:999px;margin-top:-4px}
+  .testi-card blockquote{font-family:'Manrope',sans-serif;font-weight:400;font-size:1.02rem;line-height:1.55;letter-spacing:-.005em;color:rgba(255,255,255,.92);flex:1;margin-top:4px}
+  .testi-card blockquote em{font-style:normal;color:var(--champagne);font-weight:500}
+  .testi-card .who{display:flex;align-items:center;gap:14px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1)}
+
+  .testi-controls{margin-top:36px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;position:relative;z-index:3}
+  @media(max-width:780px){.testi-controls{grid-template-columns:1fr;gap:16px}}
+  .testi-dots{display:flex;gap:8px;align-items:center}
+  .testi-dots button{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);border:0;cursor:pointer;padding:0;transition:all .4s cubic-bezier(.2,.7,.2,1)}
+  .testi-dots button.active{background:var(--champagne);width:36px;border-radius:999px}
+  .testi-dots button:hover:not(.active){background:rgba(255,255,255,.4)}
+  .testi-nav{display:flex;gap:10px;justify-self:end}
+  .testi-arrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:transparent;color:var(--paper);cursor:pointer;display:grid;place-items:center;transition:all .3s ease}
+  .testi-arrow:hover{background:var(--champagne);border-color:var(--champagne);color:var(--navy-900)}
+  .testi-arrow svg{width:16px;height:16px}
+  .testi-progress{height:2px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;position:relative}
+  .testi-progress-fill{height:100%;background:linear-gradient(90deg,var(--champagne-soft),var(--champagne));width:0;border-radius:4px}
+  .testi-progress-fill.run{animation:progRun var(--testi-interval,6500ms) linear forwards}
+  @keyframes progRun{from{width:0}to{width:100%}}
+  .testi-frame.paused .testi-progress-fill{animation-play-state:paused}
+
+  /* legacy avatar helpers (kept) */
+  .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blue-400),var(--navy-500));display:grid;place-items:center;font-family:'Manrope',sans-serif;font-weight:600;color:var(--paper);font-size:1rem}
+  .who-name{font-weight:500;font-size:.95rem;color:var(--paper)}
+  .who-role{font-size:.78rem;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-top:2px}
+
+  /* ---------- TEAM ---------- */
+  .team{padding:140px 0 120px;background:var(--paper)}
+  .team-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:center;margin-top:60px}
+  @media(max-width:900px){.team-grid{grid-template-columns:1fr}}
+  .founder-img{aspect-ratio:4/5;border-radius:32px;overflow:hidden;position:relative;background:
+    linear-gradient(180deg,rgba(11,30,63,0) 60%,rgba(11,30,63,.4) 100%),
+    repeating-linear-gradient(45deg,#1A3563,#1A3563 20px,#244680 20px,#244680 40px);box-shadow:0 30px 80px rgba(11,30,63,.15)}
+  .founder-img::before{content:"FOUNDER · HAROON";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.2em;color:rgba(255,255,255,.5)}
+  .founder-img .signature{position:absolute;bottom:24px;left:24px;right:24px;color:var(--paper);font-family:'Manrope',sans-serif;font-weight:600;font-size:1.2rem;letter-spacing:-.015em}
+  .founder-img .signature small{display:block;font-family:'Manrope',sans-serif;font-style:normal;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champagne-soft);margin-top:4px}
+  .founder-bio h3{font-family:'Manrope',sans-serif;font-weight:600;font-size:2.2rem;line-height:1.05;color:var(--navy-900);margin-bottom:18px;letter-spacing:-.035em}
+  .founder-bio h3 em{font-style:normal;color:var(--navy-500);font-weight:500}
+  .founder-bio .role{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne);margin-bottom:20px;display:block}
+  .founder-bio p{color:var(--navy-700);line-height:1.75;margin-bottom:18px}
+  .quals{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .qual{padding:8px 14px;background:var(--cream);border-radius:999px;font-size:.82rem;color:var(--navy-700);border:1px solid rgba(11,30,63,.06)}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--navy-900);color:var(--paper);padding:140px 0 100px;position:relative;overflow:hidden}
+  .contact::before{content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle,rgba(212,165,116,.08),transparent 60%);pointer-events:none}
+  .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:80px;margin-top:60px;position:relative}
+  @media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+  .contact h2.serif{font-family:'Manrope',sans-serif;font-weight:600;font-size:clamp(2.4rem,4.6vw,4rem);line-height:1.02;letter-spacing:-.04em;margin-bottom:20px}
+  .contact h2 em{font-style:normal;color:var(--champagne);font-weight:500}
+  .contact-info{display:grid;gap:20px;margin-top:40px}
+  .ci-row{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .ci-row .lbl{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champagne);align-self:center}
+  .ci-row .val{color:rgba(255,255,255,.9);font-size:1rem}
+  .contact-card{padding:40px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:28px;backdrop-filter:blur(10px)}
+  .contact-card h3{font-family:'Manrope',sans-serif;font-weight:600;font-size:1.35rem;margin-bottom:8px;letter-spacing:-.025em}
+  .contact-card p{color:rgba(255,255,255,.65);font-size:.92rem;margin-bottom:28px;line-height:1.6}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:8px}
+  .field input,.field textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.18);color:var(--paper);font-family:'Manrope',sans-serif;font-size:1rem;padding:8px 0;outline:none;transition:border-color .3s}
+  .field input:focus,.field textarea:focus{border-color:var(--champagne)}
+  .field textarea{resize:none;height:80px}
+
+  /* ---------- FOOTER ---------- */
+  .footer{background:#040D1F;color:var(--paper);padding:80px 0 32px;border-top:1px solid rgba(255,255,255,.06)}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:60px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,.06)}
+  @media(max-width:780px){.footer-top{grid-template-columns:1fr 1fr;gap:40px}}
+  .footer-brand p{margin-top:20px;color:rgba(255,255,255,.55);font-size:.9rem;line-height:1.65;max-width:340px}
+  .footer-col h4{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne);margin-bottom:18px}
+  .footer-col a{display:block;color:rgba(255,255,255,.65);text-decoration:none;font-size:.92rem;padding:6px 0;transition:color .3s}
+  .footer-col a:hover{color:var(--champagne)}
+  .footer-bottom{padding-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .footer-bottom p{color:rgba(255,255,255,.4);font-size:.82rem}
+  .footer-tag{font-family:'Manrope',sans-serif;font-weight:500;color:var(--champagne-soft);font-size:.92rem;letter-spacing:-.01em}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top">
+      <div class="logo-mark">D</div>
+      <div class="logo-text">Dre<em>X</em> CFO</div>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">How it works</a>
+      <a href="#team">Team</a>
+      <a class="nav-cta" href="#contact">Book a call →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top" data-screen-label="01 Hero">
+
+  <!-- Variant 1: Sky Video -->
+  <div class="hero-variant active" data-variant="video">
+    <div class="bg">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto">
+        <source src="assets/sky-hero.mp4" type="video/mp4" />
+      </video>
+      <div class="vignette"></div>
+      <div class="data-particles" id="particles"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-tag"><span class="dot"></span> Available · London & Worldwide</div>
+      <h1 class="reveal">Smarter financial <em>leadership.</em><br/>Automated. Always on.</h1>
+      <p class="lead reveal d1">DreX CFO combines senior-level financial expertise with intelligent automation — giving growing businesses real-time clarity, strategic insight, and measurable results, without the cost of a full-time CFO.</p>
+      <div class="hero-actions reveal d2">
+        <a class="btn btn-primary" href="#contact">Schedule a free consultation <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#services">Explore services</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variant 2: Data Viz -->
+  <div class="hero-variant hv-data" data-variant="data">
+    <div class="bg"></div>
+    <div class="hero-content">
+      <div>
+        <div class="hero-tag"><span class="dot"></span> Real-time clarity</div>
+        <h1>Finance that <em>thinks</em> as fast as you do.</h1>
+        <p class="lead">Automated reporting dashboards, live cash-flow models, and scenario forecasts — purpose-built so you see the next move before it happens.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Schedule a free consultation</a>
+          <a class="btn btn-ghost" href="#services">Explore services</a>
+        </div>
+      </div>
+      <div class="data-stage">
+        <div class="chart-card c1">
+          <div class="card-head"><span>Revenue · QTD</span><span class="up">▲ 23.4%</span></div>
+          <div class="big-num">£1.84M</div>
+          <div class="bars">
+            <span style="height:30%"></span><span style="height:48%"></span><span style="height:42%"></span><span style="height:62%"></span><span style="height:55%"></span><span style="height:78%"></span><span style="height:88%"></span>
+          </div>
+        </div>
+        <div class="chart-card c2">
+          <div class="card-head"><span>Burn rate</span><span class="tag">Healthy</span></div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div><div class="sm-num">£62k</div><div style="font-size:.65rem;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace;letter-spacing:.1em">/MONTH</div></div>
+            <div class="donut"></div>
+          </div>
+        </div>
+        <div class="chart-card c3">
+          <div class="card-head"><span>Runway forecast</span><span class="up">+ 4.2 mo</span></div>
+          <svg class="spark" viewBox="0 0 200 60" preserveAspectRatio="none">
+            <path d="M0,45 L25,40 L50,42 L75,30 L100,32 L125,22 L150,18 L175,14 L200,8" fill="none" stroke="#D4A574" stroke-width="2"/>
+            <path d="M0,45 L25,40 L50,42 L75,30 L100,32 L125,22 L150,18 L175,14 L200,8 L200,60 L0,60 Z" fill="url(#grad)" opacity=".3"/>
+            <defs><linearGradient id="grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D4A574"/><stop offset="1" stop-color="#D4A574" stop-opacity="0"/></linearGradient></defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variant 3: Editorial -->
+  <div class="hero-variant hv-editorial" data-variant="editorial">
+    <div class="bg"></div>
+    <div class="hero-content">
+      <div>
+        <div class="hero-tag"><span class="dot"></span> Established 2025 · ACCA · CFA</div>
+        <h1>The CFO your business <em>deserves</em> — without the overhead.</h1>
+        <p class="lead">Senior-level financial leadership for founder-led businesses, SMEs, and ambitious startups. Deep expertise, modern automation, measurable growth.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Schedule a free consultation</a>
+          <a class="btn btn-ghost" href="#about">Read our story</a>
+        </div>
+      </div>
+      <div class="portrait-wrap">
+        <div class="portrait"></div>
+        <div class="portrait-badge">
+          Trusted by 100+ <span>founders worldwide</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variant 4: Typographic Orbs -->
+  <div class="hero-variant hv-orbs" data-variant="orbs">
+    <div class="bg">
+      <div class="orb o1"></div>
+      <div class="orb o2"></div>
+      <div class="orb o3"></div>
+    </div>
+    <div class="marquee"><div class="marquee-track">
+      <span>Fractional CFO</span><span>·</span><span>Strategic Modelling</span><span>·</span><span>Audit Readiness</span><span>·</span><span>FP&amp;A</span><span>·</span>
+      <span>Fractional CFO</span><span>·</span><span>Strategic Modelling</span><span>·</span><span>Audit Readiness</span><span>·</span><span>FP&amp;A</span><span>·</span>
+    </div></div>
+    <div class="hero-content">
+      <div class="hero-tag"><span class="dot"></span> Precision finance · powered by intelligence</div>
+      <h1>Smarter finances.<br/><em>Automated</em> insights.<br/>Measurable growth.</h1>
+      <p class="lead">Your CFO. Automated. Always on. — Expert financial leadership built for the modern business.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact">Schedule a free consultation</a>
+        <a class="btn btn-ghost" href="#services">Explore services</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero stats -->
+  <div class="hero-stats">
+    <div class="hero-stats-inner">
+      <div class="hero-stat"><div class="num">100+</div><div class="lbl">Clients served</div></div>
+      <div class="hero-stat"><div class="num">£40M+</div><div class="lbl">Revenue analysed</div></div>
+      <div class="hero-stat"><div class="num">100%</div><div class="lbl">5‑star satisfaction</div></div>
+    </div>
+  </div>
+
+  <!-- Switcher -->
+  <div class="hero-switcher" id="heroSwitch">
+    <button class="active" data-go="video">01 · Video</button>
+    <button data-go="data">02 · Data</button>
+    <button data-go="editorial">03 · Editorial</button>
+    <button data-go="orbs">04 · Orbs</button>
+  </div>
+</section>
+
+<!-- DIVIDER navy → paper (hero → about) -->
+<svg class="divider" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+  <rect width="1440" height="160" fill="#06152E"/>
+  <path d="M0,28 C480,72 960,72 1440,28 L1440,160 L0,160 Z" fill="#102A56"/>
+  <path d="M0,70 C480,108 960,108 1440,70 L1440,160 L0,160 Z" fill="#3D5A88"/>
+  <path d="M0,108 C480,138 960,138 1440,108 L1440,160 L0,160 Z" fill="#A8B6CC"/>
+  <path d="M0,138 C480,162 960,162 1440,138 L1440,160 L0,160 Z" fill="#FBFAF7"/>
+</svg>
+<section class="about" id="about" data-screen-label="02 About">
+  <div class="wrap">
+    <div class="about-head reveal">
+      <span class="eyebrow">About / Our story</span>
+      <h2 class="section-title">Senior financial leadership, <em>finally accessible.</em></h2>
+      <p class="section-intro">Founded by Haroon — a chartered financial professional with 10+ years across accounting, valuation, and strategic advisory — DreX CFO closes the gap between bookkeeping and a full-time CFO.</p>
+    </div>
+
+    <div class="about-body">
+      <div class="about-story reveal d1">
+        <p class="first">DreX CFO was founded with one goal: to make senior CFO-level financial leadership genuinely accessible — combining deep expertise with modern automation tools to deliver faster, smarter, more impactful results.</p>
+        <p>We go beyond traditional advisory. We integrate intelligent automation into every engagement — from reporting dashboards and real-time cash-flow models to data-driven KPI tracking and scenario forecasting. Clients get the same quality of insight as a world-class finance team, delivered more efficiently and at a fraction of the cost of a full-time hire.</p>
+        <p>Over 100 clients across multiple industries and countries have trusted DreX CFO to manage, analyse, and optimise their finances. Whether you're a freelancer needing structure or an SME preparing for your next investment round — we're the partner you've been looking for.</p>
+      </div>
+
+      <aside class="about-facts reveal d2">
+        <div class="fact-block">
+          <span class="mono">Founded</span>
+          <strong>2025 · London, UK</strong>
+        </div>
+        <div class="fact-block">
+          <span class="mono">Founder</span>
+          <strong>Haroon — ACCA, CFA</strong>
+          <small>10+ years across accounting, valuation, and strategic advisory</small>
+        </div>
+        <div class="fact-block">
+          <span class="mono">Sectors served</span>
+          <strong>Technology, retail, professional services, healthcare &amp; more</strong>
+        </div>
+        <div class="fact-block">
+          <span class="mono">Engagement model</span>
+          <strong>Fractional · Project · Fixed package</strong>
+        </div>
+        <div class="fact-block highlight">
+          <span class="mono">Coverage</span>
+          <strong>UK &amp; international</strong>
+          <small>Remote-first · in-person available across Greater London</small>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Full-width pull quote -->
+  <div class="pullquote-wrap reveal">
+    <div class="pullquote">
+      <div class="pq-top">
+        <span class="pq-rule"></span>
+        <span class="pq-mono">A note from the founder</span>
+        <span class="pq-rule"></span>
+      </div>
+      <span class="qmark">“</span>
+      <p class="pq-text">The best financial decisions are made with <em>clarity</em> — not chaos. We give every client the data, the insight, and the strategy to move forward with confidence.</p>
+      <div class="pq-author">
+        <div class="pq-line"></div>
+        <div>
+          <div class="pq-name">Haroon</div>
+          <div class="pq-role">Founder · DreX CFO</div>
+        </div>
+      </div>
+      <div class="pq-creds">
+        <span>ACCA</span>
+        <span class="dot">·</span>
+        <span>CFA</span>
+        <span class="dot">·</span>
+        <span>MSc Business Analytics</span>
+        <span class="dot">·</span>
+        <span>BSc Accounting &amp; Finance</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Principles -->
+  <div class="principles-section">
+    <div class="wrap">
+      <div class="principles-head reveal">
+        <span class="eyebrow">What we stand for</span>
+        <h3 class="principles-title">Three principles guide every <em>engagement.</em></h3>
+      </div>
+
+      <div class="principles reveal d1">
+        <div class="principle">
+          <span class="watermark">01</span>
+          <div class="p-mark"><span class="dot-mark dot-circle"></span><span class="line"></span></div>
+          <span class="p-eyebrow">Foundation</span>
+          <h4>Clarity over chaos</h4>
+          <p>Every number on every dashboard answers a real question. We replace spreadsheet sprawl with a single source of financial truth — one that you, your board, and your investors all read the same way.</p>
+          <div class="p-tagline">no jargon · no surprises</div>
+        </div>
+        <div class="principle">
+          <span class="watermark">02</span>
+          <div class="p-mark"><span class="dot-mark dot-diamond"></span><span class="line"></span></div>
+          <span class="p-eyebrow">Direction</span>
+          <h4>Insight, not just data</h4>
+          <p>Reporting is the baseline. We translate movement in your numbers into the next decision worth making — and the one to avoid. The output is judgement, backed by evidence.</p>
+          <div class="p-tagline">decisions · not dashboards alone</div>
+        </div>
+        <div class="principle">
+          <span class="watermark">03</span>
+          <div class="p-mark"><span class="dot-mark dot-square"></span><span class="line"></span></div>
+          <span class="p-eyebrow">Leverage</span>
+          <h4>Automation as leverage</h4>
+          <p>Modern tools handle what they should — reconciliation, reporting, refresh cycles. Our time goes where it matters: strategy, scenario planning, and the call you need to make this quarter.</p>
+          <div class="p-tagline">software for speed · humans for judgement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER paper → navy (about → services) -->
+<svg class="divider" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+  <rect width="1440" height="160" fill="#FBFAF7"/>
+  <path d="M0,28 C480,72 960,72 1440,28 L1440,160 L0,160 Z" fill="#D4D8D2"/>
+  <path d="M0,70 C480,108 960,108 1440,70 L1440,160 L0,160 Z" fill="#8FA4BE"/>
+  <path d="M0,108 C480,138 960,138 1440,108 L1440,160 L0,160 Z" fill="#3D5A88"/>
+  <path d="M0,138 C480,162 960,162 1440,138 L1440,160 L0,160 Z" fill="#06152E"/>
+</svg>
+
+<!-- SERVICES -->
+<section class="services" id="services" data-screen-label="03 Services">
+  <div class="wrap">
+    <div class="services-head">
+      <div class="reveal">
+        <span class="eyebrow">Services</span>
+        <h2 class="section-title">Five ways DreX CFO <em>moves your numbers.</em></h2>
+      </div>
+      <p class="section-intro reveal d1">Each engagement applies across all industries — technology, retail, professional services, and beyond. Built modularly, so you take exactly what you need.</p>
+    </div>
+
+    <div class="orbit reveal">
+      <svg class="orbit-svg" viewBox="0 0 1100 1000" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <marker id="orb-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L10,5 L0,10 Z" fill="#D4A574"/>
+          </marker>
+          <linearGradient id="orb-line" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#D4A574" stop-opacity=".25"/>
+            <stop offset="1" stop-color="#D4A574" stop-opacity=".9"/>
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke="url(#orb-line)" stroke-width="1.5" stroke-dasharray="5 6">
+          <path d="M540,240 C548,290 552,335 550,378" marker-end="url(#orb-arr)"/>
+          <path d="M820,400 Q740,430 660,470" marker-end="url(#orb-arr)"/>
+          <path d="M770,790 Q700,690 625,580" marker-end="url(#orb-arr)"/>
+          <path d="M330,790 Q400,690 475,580" marker-end="url(#orb-arr)"/>
+          <path d="M280,400 Q360,430 440,470" marker-end="url(#orb-arr)"/>
+        </g>
+      </svg>
+
+      <div class="orbit-core">
+        <div class="orbit-core-inner">
+          <div class="mark">D</div>
+          <div class="core-name">DreX CFO</div>
+          <div class="core-sub">at the centre</div>
+        </div>
+      </div>
+
+      <article class="orbit-svc" data-pos="1">
+        <span class="num">01 · Service</span>
+        <h3>Fractional CFO Services</h3>
+        <p>Senior CFO leadership on a flexible basis. Board-ready reporting, strategic planning, and the calls only an experienced operator can make.</p>
+      </article>
+      <article class="orbit-svc" data-pos="2">
+        <span class="num">02 · Service</span>
+        <h3>Accounting Services</h3>
+        <p>Month-end close, management accounts, statutory compliance — handled with rigour and the responsiveness of a partner who knows your business.</p>
+      </article>
+      <article class="orbit-svc" data-pos="3">
+        <span class="num">03 · Service</span>
+        <h3>Strategic Financial Modelling</h3>
+        <p>Three-statement models, scenario forecasts, unit economics, and valuations — built to drive real decisions, not just live in a deck.</p>
+      </article>
+      <article class="orbit-svc" data-pos="4">
+        <span class="num">04 · Service</span>
+        <h3>Audit Readiness</h3>
+        <p>From document trail to control framework, we prepare your business for audit calmly and confidently — a routine review, not a stressful event.</p>
+      </article>
+      <article class="orbit-svc" data-pos="5">
+        <span class="num">05 · Service</span>
+        <h3>Financial Packages</h3>
+        <p>Structured entry-level engagements for businesses not yet ready for full ongoing services. Fixed scope, fixed timeframe, high-impact result.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER navy → cream (services → process) -->
+<svg class="divider" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+  <rect width="1440" height="160" fill="#06152E"/>
+  <path d="M0,28 C480,72 960,72 1440,28 L1440,160 L0,160 Z" fill="#102A56"/>
+  <path d="M0,70 C480,108 960,108 1440,70 L1440,160 L0,160 Z" fill="#3D5A88"/>
+  <path d="M0,108 C480,138 960,138 1440,108 L1440,160 L0,160 Z" fill="#B5B5A7"/>
+  <path d="M0,138 C480,162 960,162 1440,138 L1440,160 L0,160 Z" fill="#F5F1EA"/>
+</svg>
+
+<!-- PROCESS -->
+<section class="process" id="process" data-screen-label="04 Process">
+  <div class="wrap">
+    <div class="process-head">
+      <div class="reveal">
+        <span class="eyebrow">How it works</span>
+        <h2 class="section-title">A five-step path from <em>questions</em> to clarity.</h2>
+      </div>
+      <p class="section-intro reveal d1">No long onboarding. No mystery. Every engagement follows the same structured rhythm — so you know exactly what happens, and when.</p>
+    </div>
+
+    <div class="proc-list reveal">
+      <div class="proc-row">
+        <div class="proc-num">01</div>
+        <div class="proc-name">Free Consultation</div>
+        <div class="proc-desc">A free discovery call to understand your business, your goals, and where DreX CFO can add the most value. No commitment, no pressure — just an honest conversation.</div>
+        <div class="proc-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-num">02</div>
+        <div class="proc-name">Financial Assessment</div>
+        <div class="proc-desc">A thorough review of your financial position — cash flow, reporting systems, expenses, and operational metrics — to identify gaps, risks, and opportunities.</div>
+        <div class="proc-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-num">03</div>
+        <div class="proc-name">Custom Strategy &amp; Roadmap</div>
+        <div class="proc-desc">A tailored financial strategy aligned with your business model, goals, and growth plans. Automated reporting tools are set up to give you real-time visibility from day one.</div>
+        <div class="proc-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-num">04</div>
+        <div class="proc-name">Implementation &amp; Integration</div>
+        <div class="proc-desc">We embed with your team and existing systems — deploying enhanced reporting, automated dashboards, financial controls, and performance metrics with minimal disruption.</div>
+        <div class="proc-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-num">05</div>
+        <div class="proc-name">Ongoing Monitoring &amp; Support</div>
+        <div class="proc-desc">Continuous performance monitoring, regular strategy reviews, and proactive guidance — adjusting course as your business grows, your goals evolve, and market conditions change.</div>
+        <div class="proc-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER cream → paper (process → why) -->
+<svg class="divider" style="height:20px" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+  <rect width="1440" height="100" fill="#F5F1EA"/>
+  <path d="M0,25 C480,55 960,55 1440,25 L1440,100 L0,100 Z" fill="#EFE9DC"/>
+  <path d="M0,55 C480,80 960,80 1440,55 L1440,100 L0,100 Z" fill="#F2EDE0"/>
+  <path d="M0,80 C480,102 960,102 1440,80 L1440,100 L0,100 Z" fill="#FBFAF7"/>
+</svg>
+
+<!-- WHY US -->
+<section class="why" id="why" data-screen-label="05 Why us">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Why DreX CFO</span>
+      <h2 class="section-title">Closing the gap between <em>records and results.</em></h2>
+    </div>
+
+    <div class="why-grid">
+      <div class="problem-card reveal">
+        <h3>The problem we solve</h3>
+        <p>Most growing businesses are caught between a bookkeeper who keeps records but offers no strategy — and a full-time CFO they can't yet justify or afford. That gap costs clarity, cash flow, and growth.</p>
+        <div class="gap-vis">
+          <div class="gap-side"><span class="mono">left of you</span><strong>Bookkeeper</strong></div>
+          <div class="gap-bridge">DreX · the bridge</div>
+          <div class="gap-side"><span class="mono">right of you</span><strong>Full-time CFO</strong></div>
+        </div>
+      </div>
+
+      <div class="diff-list reveal d1">
+        <div class="diff">
+          <div class="diff-icon">+</div>
+          <div><h4>Senior expertise without overhead</h4><p>ACCA · CFA · MSc-credentialed leadership, engaged at the level your business needs — not at the cost of a full-time hire.</p></div>
+        </div>
+        <div class="diff">
+          <div class="diff-icon">~</div>
+          <div><h4>Automation built into every engagement</h4><p>Reporting dashboards, real-time cash-flow models, KPI tracking — running from day one, accurate around the clock.</p></div>
+        </div>
+        <div class="diff">
+          <div class="diff-icon">→</div>
+          <div><h4>Decisions, not just data</h4><p>We don't deliver reports. We deliver the next move — backed by clean data and ten years of judgement across sectors.</p></div>
+        </div>
+        <div class="diff">
+          <div class="diff-icon">✦</div>
+          <div><h4>Sector-agnostic, founder-fluent</h4><p>From SaaS to retail to professional services — the model adapts. The standard doesn't.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER paper → navy (why → testimonials) -->
+<svg class="divider" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+  <rect width="1440" height="160" fill="#FBFAF7"/>
+  <path d="M0,28 C480,72 960,72 1440,28 L1440,160 L0,160 Z" fill="#D4D8D2"/>
+  <path d="M0,70 C480,108 960,108 1440,70 L1440,160 L0,160 Z" fill="#8FA4BE"/>
+  <path d="M0,108 C480,138 960,138 1440,108 L1440,160 L0,160 Z" fill="#3D5A88"/>
+  <path d="M0,138 C480,162 960,162 1440,138 L1440,160 L0,160 Z" fill="#06152E"/>
+</svg>
+
+<!-- TESTIMONIALS -->
+<section class="testi" id="testimonials" data-screen-label="06 Testimonials">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
+      <span class="eyebrow" style="justify-content:center">Client voices</span>
+      <h2 class="section-title" style="color:var(--paper)">A 5-star record, <em style="color:var(--champagne)">earned engagement by engagement.</em></h2>
+    </div>
+
+    <div class="testi-frame reveal" id="testiFrame">
+      <div class="testi-meta">
+        <div class="label-row">
+          <span class="mono-rule"></span>
+          <span class="mono">Verified reviews</span>
+        </div>
+        <div class="testi-counter"><span class="cur" id="testiCur">01</span> <span style="opacity:.4">/</span> <span class="total">04</span></div>
+      </div>
+
+      <div class="carousel">
+        <div class="carousel-track" id="cTrack">
+          <article class="testi-card">
+            <div class="stars">★★★★★</div>
+            <span class="label">Business Valuation</span>
+            <blockquote>Haroon delivered a valuation that held up under serious investor scrutiny. Calm, precise, and the model was <em>bulletproof</em> — we closed the round on stronger terms because of it.</blockquote>
+            <div class="who"><div class="avatar">M</div><div><div class="who-name">Founder, Verified Client</div><div class="who-role">Series A · Technology</div></div></div>
+          </article>
+          <article class="testi-card">
+            <div class="stars">★★★★★</div>
+            <span class="label">FP&amp;A</span>
+            <blockquote>For the first time we have monthly reporting we can actually trust. The dashboards <em>run themselves</em> and our board meetings are now about decisions — not reconciling numbers.</blockquote>
+            <div class="who"><div class="avatar">S</div><div><div class="who-name">CEO, Verified Client</div><div class="who-role">Professional Services</div></div></div>
+          </article>
+          <article class="testi-card">
+            <div class="stars">★★★★★</div>
+            <span class="label">Forecasting &amp; Cash Flow</span>
+            <blockquote>The 13-week cash model is something I check every Monday morning. It has changed how we hire, how we invest, and <em>frankly how I sleep.</em></blockquote>
+            <div class="who"><div class="avatar">J</div><div><div class="who-name">Founder, Verified Client</div><div class="who-role">D2C Retail</div></div></div>
+          </article>
+          <article class="testi-card">
+            <div class="stars">★★★★★</div>
+            <span class="label">Pro Forma &amp; Modelling</span>
+            <blockquote>We needed an investor-grade model in three weeks. Got one in two. <em>Detailed, defensible,</em> and DreX walked our CFO through every assumption.</blockquote>
+            <div class="who"><div class="avatar">A</div><div><div class="who-name">COO, Verified Client</div><div class="who-role">Healthcare Tech</div></div></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="testi-controls">
+        <div class="testi-dots" id="testiDots">
+          <button class="active" data-go="0" aria-label="Go to slide 1"></button>
+          <button data-go="1" aria-label="Go to slide 2"></button>
+          <button data-go="2" aria-label="Go to slide 3"></button>
+          <button data-go="3" aria-label="Go to slide 4"></button>
+        </div>
+        <div class="testi-progress"><div class="testi-progress-fill run" id="testiFill"></div></div>
+        <div class="testi-nav">
+          <button class="testi-arrow" id="testiPrev" aria-label="Previous testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button>
+          <button class="testi-arrow" id="testiNext" aria-label="Next testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER navy → paper (testimonials → team) -->
+<svg class="divider" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+  <rect width="1440" height="160" fill="#06152E"/>
+  <path d="M0,28 C480,72 960,72 1440,28 L1440,160 L0,160 Z" fill="#102A56"/>
+  <path d="M0,70 C480,108 960,108 1440,70 L1440,160 L0,160 Z" fill="#3D5A88"/>
+  <path d="M0,108 C480,138 960,138 1440,108 L1440,160 L0,160 Z" fill="#A8B6CC"/>
+  <path d="M0,138 C480,162 960,162 1440,138 L1440,160 L0,160 Z" fill="#FBFAF7"/>
+</svg>
+
+<!-- TEAM -->
+<section class="team" id="team" data-screen-label="07 Team">
+  <div class="wrap">
+    <div class="reveal" style="max-width:720px">
+      <span class="eyebrow">Team</span>
+      <h2 class="section-title">Led by a chartered hand and a <em>builder's instinct.</em></h2>
+    </div>
+
+    <div class="team-grid">
+      <div class="founder-img reveal">
+        <div class="signature">Haroon<small>Founder · DreX CFO</small></div>
+      </div>
+      <div class="founder-bio reveal d1">
+        <span class="role">Founder · Lead Advisor</span>
+        <h3>Ten years of <em>finance,</em> built into one practice.</h3>
+        <p>Haroon is a chartered financial professional with more than a decade of experience across accounting, financial analysis, valuation, and strategic advisory. He has partnered with everyone from pre-seed founders to institutional investors — and built DreX CFO to give them all access to the same quality of financial thinking.</p>
+        <p>His approach combines technical depth with practical empathy for what it actually takes to run and grow a business — and a conviction that modern automation should serve judgement, not replace it.</p>
+        <div class="quals">
+          <span class="qual">ACCA</span>
+          <span class="qual">CFA</span>
+          <span class="qual">MSc Business Analytics</span>
+          <span class="qual">BSc Accounting &amp; Finance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER paper → navy (team → contact) -->
+<svg class="divider" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+  <rect width="1440" height="160" fill="#FBFAF7"/>
+  <path d="M0,28 C480,72 960,72 1440,28 L1440,160 L0,160 Z" fill="#D4D8D2"/>
+  <path d="M0,70 C480,108 960,108 1440,70 L1440,160 L0,160 Z" fill="#8FA4BE"/>
+  <path d="M0,108 C480,138 960,138 1440,108 L1440,160 L0,160 Z" fill="#3D5A88"/>
+  <path d="M0,138 C480,162 960,162 1440,138 L1440,160 L0,160 Z" fill="#06152E"/>
+</svg>
+
+<!-- CONTACT -->
+<section class="contact" id="contact" data-screen-label="08 Contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="eyebrow">Contact</span>
+        <h2 class="serif">Let's talk about <em>your business.</em></h2>
+        <p style="color:rgba(255,255,255,.7);max-width:520px;font-size:1.04rem;line-height:1.7">Schedule a free 30-minute consultation. No commitment — just a direct conversation about how we can help you achieve financial clarity, smarter reporting, and measurable growth.</p>
+
+        <div class="contact-info">
+          <div class="ci-row"><span class="lbl">Phone</span><span class="val">+44 7561 325182</span></div>
+          <div class="ci-row"><span class="lbl">Email</span><span class="val">hello@drexcfo.com</span></div>
+          <div class="ci-row"><span class="lbl">Location</span><span class="val">London, United Kingdom</span></div>
+          <div class="ci-row"><span class="lbl">Hours</span><span class="val">Monday – Friday · 9am – 6pm GMT</span></div>
+          <div class="ci-row"><span class="lbl">Calendar</span><span class="val">calendly.com/drexcfo/30min</span></div>
+        </div>
+      </div>
+
+      <div class="contact-card reveal d1">
+        <h3>Book a free 30-min consultation</h3>
+        <p>We'll reply within one business day to schedule a call.</p>
+        <div class="field"><label>Name</label><input type="text" placeholder="Your full name"/></div>
+        <div class="field"><label>Company</label><input type="text" placeholder="Where you work"/></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="you@business.com"/></div>
+        <div class="field"><label>What you'd like to discuss</label><textarea placeholder="A few lines about your business and where you'd like more clarity"></textarea></div>
+        <a class="btn btn-primary" href="#" style="width:100%;justify-content:center;margin-top:8px">Request consultation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="#top" style="display:inline-flex">
+          <div class="logo-mark">D</div>
+          <div class="logo-text">Dre<em>X</em> CFO</div>
+        </a>
+        <p>Expert fractional CFO services, accounting, financial modelling, and audit readiness — powered by intelligent automation. Based in London. Serving businesses of all sizes across all industries, nationally and internationally.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#services">Fractional CFO</a>
+        <a href="#services">Accounting</a>
+        <a href="#services">Financial Modelling</a>
+        <a href="#services">Audit Readiness</a>
+        <a href="#services">Financial Packages</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#about">About</a>
+        <a href="#process">How it works</a>
+        <a href="#team">Team</a>
+        <a href="#testimonials">Client work</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+447561325182">+44 7561 325182</a>
+        <a href="mailto:hello@drexcfo.com">hello@drexcfo.com</a>
+        <a href="#">London, UK</a>
+        <a href="#contact">Book a call →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 DreX CFO. All rights reserved.</p>
+      <p class="footer-tag">Smarter finances. Automated insights. Measurable growth.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Hero switcher
+  const switcher = document.getElementById('heroSwitch');
+  const variants = document.querySelectorAll('.hero-variant');
+  switcher.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-go]');
+    if (!btn) return;
+    switcher.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+    variants.forEach(v => v.classList.toggle('active', v.dataset.variant === btn.dataset.go));
+  });
+
+  // Particles for Variant 1
+  const pc = document.getElementById('particles');
+  for (let i = 0; i < 24; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = (Math.random() * 100) + '%';
+    p.style.animationDelay = (Math.random() * 12) + 's';
+    p.style.animationDuration = (8 + Math.random() * 8) + 's';
+    p.style.opacity = (0.3 + Math.random() * 0.6).toFixed(2);
+    pc.appendChild(p);
+  }
+
+  // Stat counters
+  const counted = new WeakSet();
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting || counted.has(e.target)) return;
+      counted.add(e.target);
+      const target = parseInt(e.target.dataset.count, 10);
+      const dur = 1600; const start = performance.now();
+      const isPlusOnly = e.target.querySelector('sup');
+      const sup = isPlusOnly ? isPlusOnly.outerHTML : '';
+      function tick(now) {
+        const t = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const val = Math.round(target * eased);
+        e.target.innerHTML = val + sup;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+  // (Process auto-cycle removed — process is now a static row list)
+
+  // Testimonials 3-up carousel
+  (function(){
+    const frame = document.getElementById('testiFrame');
+    if (!frame) return;
+    const track = document.getElementById('cTrack');
+    const dots = frame.querySelectorAll('.testi-dots button');
+    const curEl = document.getElementById('testiCur');
+    const fill = document.getElementById('testiFill');
+    const prev = document.getElementById('testiPrev');
+    const next = document.getElementById('testiNext');
+    const interval = 6500;
+    const realCount = track.children.length;
+    let perView = 3;
+    let pos = 0;
+    let timer = null;
+    let busy = false;
+
+    function getPerView(){
+      const w = window.innerWidth;
+      return w < 700 ? 1 : w < 1000 ? 2 : 3;
+    }
+
+    function rebuildClones(){
+      Array.from(track.querySelectorAll('.is-clone')).forEach(c => c.remove());
+      perView = getPerView();
+      const reals = Array.from(track.querySelectorAll('.testi-card:not(.is-clone)'));
+      for (let i = 0; i < perView; i++) {
+        const c = reals[i].cloneNode(true);
+        c.classList.add('is-clone');
+        track.appendChild(c);
+      }
+      apply(false);
+    }
+
+    function apply(animate){
+      const first = track.querySelector('.testi-card');
+      const w = first.getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      const dx = (w + gap) * pos;
+      if (!animate) track.classList.add('no-anim');
+      track.style.transform = 'translateX(' + (-dx) + 'px)';
+      if (!animate) requestAnimationFrame(() => track.classList.remove('no-anim'));
+      const real = ((pos % realCount) + realCount) % realCount;
+      dots.forEach((d, i) => d.classList.toggle('active', i === real));
+      if (curEl) curEl.textContent = String(real + 1).padStart(2, '0');
+      // restart progress
+      fill.classList.remove('run');
+      void fill.offsetWidth;
+      fill.classList.add('run');
+    }
+
+    function step(dir){
+      if (busy) return;
+      busy = true;
+      if (dir === -1 && pos === 0) {
+        // jump forward to clone-end position invisibly, then animate back
+        pos = realCount;
+        apply(false);
+        requestAnimationFrame(() => {
+          pos = realCount - 1;
+          apply(true);
+          setTimeout(() => busy = false, 880);
+        });
+      } else {
+        pos += dir;
+        apply(true);
+        if (pos >= realCount) {
+          setTimeout(() => {
+            pos = 0;
+            apply(false);
+            busy = false;
+          }, 880);
+        } else {
+          setTimeout(() => busy = false, 880);
+        }
+      }
+    }
+
+    function goTo(i){
+      if (busy) return;
+      busy = true;
+      pos = i;
+      apply(true);
+      setTimeout(() => busy = false, 880);
+    }
+
+    function start(){ stop(); timer = setInterval(() => step(1), interval); }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+
+    dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); start(); }));
+    prev.addEventListener('click', () => { step(-1); start(); });
+    next.addEventListener('click', () => { step(1); start(); });
+    frame.addEventListener('mouseenter', () => { stop(); frame.classList.add('paused'); });
+    frame.addEventListener('mouseleave', () => { frame.classList.remove('paused'); start(); });
+    window.addEventListener('resize', () => { rebuildClones(); });
+
+    // Start when section enters view
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) start(); else stop(); });
+    }, { threshold: 0.2 });
+    io.observe(frame);
+
+    rebuildClones();
+  })();
+</script>
+
+</body>
+</html>
