@@ -7,7 +7,6 @@ const contactInfo = [
   { label: "Email", value: "haroonbutt1662@gmail.com" },
   { label: "Location", value: "London, United Kingdom" },
   { label: "Hours", value: "Monday – Friday · 9am – 6pm GMT" },
-  { label: "Calendar", value: "calendly.com/drexcfo/30min" },
 ];
 
 export default function Contact() {
