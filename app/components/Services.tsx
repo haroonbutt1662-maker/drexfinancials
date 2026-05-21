@@ -140,7 +140,7 @@ export default function Services() {
               <div className="orbit-core-ring-inner" />
               <div className="orbit-core-ring-outer" />
               <Image
-                src="/Logo 2.png"
+                src="/Logo2.png"
                 alt="DreX CFO"
                 width={120}
                 height={120}

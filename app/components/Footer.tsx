@@ -23,7 +23,7 @@ export default function Footer() {
               style={{ color: "var(--paper)" }}
             >
               <Image
-                src="/Logo 2.png"
+                src="/Logo2.png"
                 alt="DreX CFO"
                 width={90}
                 height={56}

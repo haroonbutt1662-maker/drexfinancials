@@ -37,7 +37,7 @@ export default function Nav() {
             onClick={close}
           >
             <Image
-              src="/Logo 2.png"
+              src="/Logo2.png"
               alt="DreX CFO"
               width={200}
               height={115}
