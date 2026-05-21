@@ -91,18 +91,15 @@ export default function Process() {
             {steps.map((step) => (
               <div
                 key={step.num}
-                className="proc-row group grid items-center cursor-pointer"
-                style={{
-                  padding: "42px 36px",
-                  gridTemplateColumns: "80px 1.4fr 2fr auto",
-                  gap: 36,
-                }}
+                className="proc-row group cursor-pointer px-5 md:px-9 py-6 md:py-[42px]
+                           grid grid-cols-[44px_1fr_auto] md:grid-cols-[80px_1.4fr_2fr_auto]
+                           gap-x-4 md:gap-x-9 gap-y-1 items-start md:items-center"
               >
                 <div
                   style={{
                     fontFamily: "var(--font-manrope)",
                     fontWeight: 500,
-                    fontSize: "1.5rem",
+                    fontSize: "1.2rem",
                     color: "var(--champagne)",
                     lineHeight: 1,
                     letterSpacing: "-0.02em",
@@ -114,7 +111,7 @@ export default function Process() {
                   style={{
                     fontFamily: "var(--font-manrope)",
                     fontWeight: 600,
-                    fontSize: "1.25rem",
+                    fontSize: "1.1rem",
                     lineHeight: 1.15,
                     letterSpacing: "-0.025em",
                     color: "var(--navy-900)",
@@ -122,17 +119,19 @@ export default function Process() {
                 >
                   {step.name}
                 </div>
-                <div className="proc-desc" style={{ color: "var(--muted)", fontSize: "0.92rem", lineHeight: 1.6 }}>
-                  {step.desc}
-                </div>
+                {/* Arrow: spans 2 rows on mobile, 1 row on desktop */}
                 <div
-                  className="proc-arrow-btn w-[46px] h-[46px] rounded-full grid place-items-center transition-all duration-300"
-                  style={{
-                    border: "1px solid rgba(11,30,63,.18)",
-                    color: "var(--navy-700)",
-                  }}
+                  className="proc-arrow-btn row-span-2 md:row-span-1 self-center w-[40px] h-[40px] md:w-[46px] md:h-[46px] rounded-full grid place-items-center transition-all duration-300"
+                  style={{ border: "1px solid rgba(11,30,63,.18)", color: "var(--navy-700)" }}
                 >
                   <ArrowIcon />
+                </div>
+                {/* Description: row 2 col 2 on mobile, row 1 col 3 on desktop */}
+                <div
+                  className="col-start-2 md:col-start-auto"
+                  style={{ color: "var(--muted)", fontSize: "0.88rem", lineHeight: 1.6 }}
+                >
+                  {step.desc}
                 </div>
               </div>
             ))}

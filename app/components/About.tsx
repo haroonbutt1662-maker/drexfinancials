@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import Reveal from "./Reveal";
 
 function FactBlock({
@@ -70,14 +69,37 @@ function FactBlock({
 
 function PullQuote() {
   return (
-    <div className="pullquote-wrap py-16 pb-12 md:py-[140px] md:pb-[100px]" style={{ background: "var(--paper)" }}>
-      <div className="relative max-w-[1040px] mx-auto px-5 md:px-[60px] text-center">
-        <div className="flex items-center justify-content-center gap-[18px] mb-8 relative" style={{ justifyContent: "center" }}>
-          <span className="w-[60px] h-px" style={{ background: "rgba(11,30,63,.18)" }} />
+    <div
+      className="max-w-[1280px] mx-auto px-5 md:px-8 py-10 md:py-[60px]"
+    >
+      <div
+        className="rounded-[28px] px-8 py-10 md:px-14 md:py-12 flex flex-col md:flex-row gap-8 md:gap-14 items-start md:items-center"
+        style={{
+          background: "linear-gradient(135deg, var(--navy-900) 0%, var(--navy-700) 100%)",
+          border: "1px solid rgba(212,165,116,.3)",
+          boxShadow: "0 8px 40px rgba(6,21,46,.25)",
+        }}
+      >
+        {/* Big quote mark */}
+        <span
+          className="flex-shrink-0 leading-none select-none"
+          style={{
+            fontFamily: "var(--font-instrument-serif)",
+            fontSize: "5rem",
+            color: "var(--champagne)",
+            opacity: 0.6,
+            lineHeight: 1,
+          }}
+        >
+          "
+        </span>
+
+        <div className="flex-1">
           <span
+            className="block mb-4"
             style={{
               fontFamily: "var(--font-jetbrains-mono)",
-              fontSize: "0.7rem",
+              fontSize: "0.62rem",
               letterSpacing: "0.22em",
               textTransform: "uppercase",
               color: "var(--champagne)",
@@ -85,92 +107,31 @@ function PullQuote() {
           >
             A note from the founder
           </span>
-          <span className="w-[60px] h-px" style={{ background: "rgba(11,30,63,.18)" }} />
-        </div>
-        <span
-          className="block"
-          style={{
-            fontFamily: "var(--font-instrument-serif)",
-            fontSize: "7rem",
-            lineHeight: 0.5,
-            color: "var(--champagne)",
-            marginBottom: 20,
-            opacity: 0.8,
-          }}
-        >
-          "
-        </span>
-        <p
-          className="mx-auto"
-          style={{
-            fontFamily: "var(--font-manrope)",
-            fontWeight: 400,
-            fontSize: "clamp(1.5rem, 2.8vw, 2.4rem)",
-            lineHeight: 1.3,
-            letterSpacing: "-0.02em",
-            color: "var(--navy-900)",
-            maxWidth: "20ch",
-          }}
-        >
-          The best financial decisions are made with{" "}
-          <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>clarity</em>{" "}
-          — not chaos. We give every client the data, the insight, and the strategy to move forward with confidence.
-        </p>
-        <div className="mt-10 inline-flex items-center gap-[18px]">
-          <div className="w-[60px] h-px" style={{ background: "var(--navy-500)" }} />
-          <div>
-            <div
-              style={{
-                fontFamily: "var(--font-manrope)",
-                fontWeight: 600,
-                color: "var(--navy-900)",
-                fontSize: "1rem",
-                textAlign: "left",
-              }}
-            >
-              Haroon
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--font-jetbrains-mono)",
-                fontSize: "0.66rem",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "var(--muted)",
-                marginTop: 4,
-                textAlign: "left",
-              }}
-            >
-              Founder · DreX CFO
+          <p
+            style={{
+              fontFamily: "var(--font-manrope)",
+              fontWeight: 400,
+              fontSize: "clamp(1.1rem, 2vw, 1.5rem)",
+              lineHeight: 1.45,
+              letterSpacing: "-0.015em",
+              color: "var(--paper)",
+            }}
+          >
+            The best financial decisions are made with{" "}
+            <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>clarity</em>{" "}
+            — not chaos. We give every client the data, the insight, and the strategy to move forward with confidence.
+          </p>
+          <div className="mt-6 flex items-center gap-4">
+            <div className="w-10 h-px" style={{ background: "rgba(212,165,116,.5)" }} />
+            <div>
+              <div style={{ fontFamily: "var(--font-manrope)", fontWeight: 600, color: "var(--paper)", fontSize: "0.95rem" }}>
+                Haroon
+              </div>
+              <div style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,.5)", marginTop: 3 }}>
+                Founder · DreX CFO
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          className="mt-9 flex justify-center items-center gap-[14px] flex-wrap"
-          style={{
-            fontFamily: "var(--font-jetbrains-mono)",
-            fontSize: "0.66rem",
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            color: "var(--muted)",
-          }}
-        >
-          {["ACCA", "CFA", "MSc Business Analytics", "BSc Accounting & Finance"].map((cred, i, arr) => (
-            <Fragment key={cred}>
-              <span
-                className="px-3 py-[6px] rounded-full"
-                style={{
-                  border: "1px solid rgba(11,30,63,.1)",
-                  background: "rgba(212,165,116,.06)",
-                }}
-              >
-                {cred}
-              </span>
-              {i < arr.length - 1 && (
-                <span style={{ color: "rgba(11,30,63,.18)" }}>·</span>
-              )}
-            </Fragment>
-          ))}
         </div>
       </div>
     </div>
@@ -332,29 +293,26 @@ export default function About() {
   return (
     <section id="about" className="pt-8 md:pt-[140px]" style={{ background: "var(--paper)" }}>
       <div className="max-w-[1280px] mx-auto px-5 md:px-8">
-        <Reveal className="max-w-[880px] mb-10 md:mb-[72px]">
-          <span className="eyebrow">About / Our story</span>
-          <h2
-            className="mt-[18px] mb-6"
-            style={{
-              fontFamily: "var(--font-manrope)",
-              fontWeight: 600,
-              fontSize: "clamp(2rem, 4.2vw, 3.4rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.035em",
-              color: "var(--navy-900)",
-            }}
-          >
-            Senior financial leadership,{" "}
-            <em className="not-italic font-medium" style={{ color: "var(--navy-500)" }}>finally accessible.</em>
-          </h2>
-          <p style={{ color: "var(--muted)", fontSize: "1.02rem", lineHeight: 1.7, maxWidth: 560 }}>
-            Founded by Haroon — a chartered financial professional with 10+ years across accounting, valuation, and strategic advisory — DreX CFO closes the gap between bookkeeping and a full-time CFO.
-          </p>
-        </Reveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-20 items-start">
-          <Reveal delay="d1" className="about-story">
+        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-20 items-center">
+          <Reveal className="about-story">
+            <span className="eyebrow">About / Our story</span>
+            <h2
+              className="mt-[18px] mb-6"
+              style={{
+                fontFamily: "var(--font-manrope)",
+                fontWeight: 600,
+                fontSize: "clamp(2rem, 4.2vw, 3.4rem)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.035em",
+                color: "var(--navy-900)",
+              }}
+            >
+              Senior financial leadership,{" "}
+              <em className="not-italic font-medium" style={{ color: "var(--navy-500)" }}>finally accessible.</em>
+            </h2>
+            <p className="mb-5" style={{ color: "var(--muted)", fontSize: "1.02rem", lineHeight: 1.7 }}>
+              Founded by Haroon — a chartered financial professional with 10+ years across accounting, valuation, and strategic advisory — DreX CFO closes the gap between bookkeeping and a full-time CFO.
+            </p>
             <p className="first mb-5" style={{ color: "var(--navy-700)", fontSize: "1rem", lineHeight: 1.75 }}>
               DreX CFO was founded with one goal: to make senior CFO-level financial leadership genuinely accessible — combining deep expertise with modern automation tools to deliver faster, smarter, more impactful results.
             </p>
@@ -368,7 +326,7 @@ export default function About() {
 
           <Reveal delay="d2">
             <aside
-              className="grid gap-0 rounded-[24px] p-[6px] md:sticky top-[120px]"
+              className="grid gap-0 rounded-[24px] p-[6px] md:sticky top-[20px]"
               style={{
                 background: "var(--cream)",
                 border: "1px solid rgba(11,30,63,.05)",

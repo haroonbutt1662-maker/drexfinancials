@@ -83,9 +83,9 @@ export default function Contact() {
               {contactInfo.map((row) => (
                 <div
                   key={row.label}
-                  className="grid gap-6 py-[18px]"
+                  className="grid gap-2 sm:gap-6 py-[18px]"
                   style={{
-                    gridTemplateColumns: "120px 1fr",
+                    gridTemplateColumns: "90px 1fr",
                     borderBottom: "1px solid rgba(255,255,255,.08)",
                   }}
                 >

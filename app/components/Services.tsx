@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "./Reveal";
 
 const services = [
@@ -6,7 +7,7 @@ const services = [
     num: "01 · Service",
     title: "Fractional CFO Services",
     desc: "Senior CFO leadership on a flexible basis. Board-ready reporting, strategic planning, and the calls only an experienced operator can make.",
-    style: { top: 0, left: "50%", transform: "translateX(-50%)" },
+    style: { top: "4%", left: "50%", transform: "translateX(-50%)" },
     delay: "orbit-float-d0",
   },
   {
@@ -14,7 +15,7 @@ const services = [
     num: "02 · Service",
     title: "Accounting Services",
     desc: "Month-end close, management accounts, statutory compliance — handled with rigour and the responsiveness of a partner who knows your business.",
-    style: { top: "30%", right: 0 },
+    style: { top: "28%", right: "11%" },
     delay: "orbit-float-d1",
   },
   {
@@ -22,7 +23,7 @@ const services = [
     num: "03 · Service",
     title: "Strategic Financial Modelling",
     desc: "Three-statement models, scenario forecasts, unit economics, and valuations — built to drive real decisions, not just live in a deck.",
-    style: { bottom: 0, right: "9%" },
+    style: { bottom: "11%", right: "22%" },
     delay: "orbit-float-d2",
   },
   {
@@ -30,7 +31,7 @@ const services = [
     num: "04 · Service",
     title: "Audit Readiness",
     desc: "From document trail to control framework, we prepare your business for audit calmly and confidently — a routine review, not a stressful event.",
-    style: { bottom: 0, left: "9%" },
+    style: { bottom: "11%", left: "22%" },
     delay: "orbit-float-d3",
   },
   {
@@ -38,7 +39,7 @@ const services = [
     num: "05 · Service",
     title: "Financial Packages",
     desc: "Structured entry-level engagements for businesses not yet ready for full ongoing services. Fixed scope, fixed timeframe, high-impact result.",
-    style: { top: "30%", left: 0 },
+    style: { top: "28%", left: "11%" },
     delay: "orbit-float-d4",
   },
 ];
@@ -47,11 +48,11 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden py-6 lg:py-[140px] services-blob-tr"
+      className="relative overflow-hidden py-6 lg:py-[70px] services-blob-tr"
       style={{ background: "var(--navy-900)", color: "var(--paper)" }}
     >
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 relative z-[5]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-[60px] items-start md:items-end mb-4 md:mb-8 lg:mb-[60px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-[60px] items-start md:items-end mb-4 md:mb-8 lg:mb-[30px]">
           <Reveal>
             <span className="eyebrow">Services</span>
             <h2
@@ -80,7 +81,7 @@ export default function Services() {
           {/* Desktop orbit layout */}
           <div
             className="relative w-full mx-auto hidden lg:block"
-            style={{ maxWidth: 1100, aspectRatio: "1.15 / 1", minHeight: 680 }}
+            style={{ maxWidth: 1100, aspectRatio: "1.2 / 1", minHeight: 600 }}
           >
             {/* Glow */}
             <div className="orbit-glow" />
@@ -88,7 +89,7 @@ export default function Services() {
             {/* SVG orbital lines */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
-              viewBox="0 0 1100 1000"
+              viewBox="0 0 1100 917"
               preserveAspectRatio="xMidYMid meet"
               aria-hidden="true"
             >
@@ -96,26 +97,27 @@ export default function Services() {
                 <marker
                   id="orb-arr"
                   viewBox="0 0 10 10"
-                  refX="9"
+                  refX="8"
                   refY="5"
-                  markerWidth="9"
-                  markerHeight="9"
+                  markerWidth="7"
+                  markerHeight="7"
                   orient="auto"
-                  markerUnits="strokeWidth"
+                  markerUnits="userSpaceOnUse"
                 >
-                  <path d="M0,0 L10,5 L0,10 Z" fill="#D4A574" />
+                  <path d="M0,1 L9,5 L0,9 Z" fill="#D4A574" />
                 </marker>
-                <linearGradient id="orb-line" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="#D4A574" stopOpacity=".25" />
-                  <stop offset="1" stopColor="#D4A574" stopOpacity=".9" />
-                </linearGradient>
               </defs>
-              <g fill="none" stroke="url(#orb-line)" strokeWidth="1.5" strokeDasharray="5 6">
-                <path d="M540,240 C548,290 552,335 550,378" markerEnd="url(#orb-arr)" />
-                <path d="M820,400 Q740,430 660,470" markerEnd="url(#orb-arr)" />
-                <path d="M770,790 Q700,690 625,580" markerEnd="url(#orb-arr)" />
-                <path d="M330,790 Q400,690 475,580" markerEnd="url(#orb-arr)" />
-                <path d="M280,400 Q360,430 440,470" markerEnd="url(#orb-arr)" />
+              <g fill="none" stroke="rgba(212,165,116,0.55)" strokeWidth="1.5" strokeDasharray="5 6">
+                {/* 01 — 90°  straight up   centre(550,458) r=105 */}
+                <line x1="550" y1="353" x2="550" y2="273" markerEnd="url(#orb-arr)" />
+                {/* 02 — 18°  upper-right */}
+                <line x1="650" y1="426" x2="726" y2="401" markerEnd="url(#orb-arr)" />
+                {/* 03 — -54° lower-right */}
+                <line x1="612" y1="543" x2="659" y2="608" markerEnd="url(#orb-arr)" />
+                {/* 04 — -126° lower-left */}
+                <line x1="488" y1="543" x2="441" y2="608" markerEnd="url(#orb-arr)" />
+                {/* 05 — 162° upper-left */}
+                <line x1="450" y1="426" x2="374" y2="401" markerEnd="url(#orb-arr)" />
               </g>
             </svg>
 
@@ -126,56 +128,26 @@ export default function Services() {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                width: 240,
-                height: 240,
+                width: 210,
+                height: 210,
                 borderRadius: "50%",
-                background: "radial-gradient(circle at 30% 30%, var(--navy-700) 0%, var(--navy-900) 70%)",
+                background: "var(--navy-900)",
                 border: "1px solid rgba(212,165,116,.35)",
-                boxShadow: "0 30px 80px rgba(6,21,46,.7), inset 0 0 60px rgba(212,165,116,.08)",
+                boxShadow: "0 30px 80px rgba(6,21,46,.7)",
+                overflow: "hidden",
               }}
             >
               <div className="orbit-core-ring-inner" />
               <div className="orbit-core-ring-outer" />
-              <div className="flex flex-col items-center justify-center gap-[6px] z-[2] px-[14px]">
-                <div
-                  className="w-16 h-16 rounded-full grid place-items-center mb-1"
-                  style={{
-                    background: "linear-gradient(135deg, var(--champagne), var(--champagne-soft))",
-                    color: "var(--navy-900)",
-                    fontFamily: "var(--font-manrope)",
-                    fontWeight: 600,
-                    fontSize: "1.9rem",
-                    letterSpacing: "-0.04em",
-                  }}
-                >
-                  D
-                </div>
-                <div
-                  style={{
-                    fontFamily: "var(--font-manrope)",
-                    fontWeight: 600,
-                    fontSize: "1rem",
-                    letterSpacing: "-0.015em",
-                    color: "var(--paper)",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  DreX CFO
-                </div>
-                <div
-                  style={{
-                    fontFamily: "var(--font-jetbrains-mono)",
-                    fontSize: "0.56rem",
-                    letterSpacing: "0.22em",
-                    color: "var(--champagne)",
-                    textTransform: "uppercase",
-                    whiteSpace: "nowrap",
-                    marginTop: 2,
-                  }}
-                >
-                  at the centre
-                </div>
-              </div>
+              <Image
+                src="/Logo 2.png"
+                alt="DreX CFO"
+                width={120}
+                height={120}
+                quality={100}
+                className="object-contain z-[2]"
+                style={{ width: 120, height: 120 }}
+              />
             </div>
 
             {/* Service cards */}

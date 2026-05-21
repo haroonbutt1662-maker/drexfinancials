@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <footer
@@ -20,28 +22,14 @@ export default function Footer() {
               className="inline-flex items-center gap-[10px] no-underline"
               style={{ color: "var(--paper)" }}
             >
-              <div
-                className="w-[34px] h-[34px] rounded-full grid place-items-center"
-                style={{
-                  background: "linear-gradient(135deg, var(--champagne), var(--champagne-soft))",
-                  color: "var(--navy-900)",
-                  fontFamily: "var(--font-instrument-serif)",
-                  fontSize: "1.2rem",
-                  fontStyle: "italic",
-                }}
-              >
-                D
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-manrope)",
-                  fontSize: "1.1rem",
-                  fontWeight: 600,
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                Dre<em className="not-italic font-bold" style={{ color: "var(--champagne)" }}>X</em> CFO
-              </div>
+              <Image
+                src="/Logo 2.png"
+                alt="DreX CFO"
+                width={90}
+                height={56}
+                className="object-contain"
+                style={{ height: 56, width: "auto" }}
+              />
             </a>
             <p
               className="mt-5"

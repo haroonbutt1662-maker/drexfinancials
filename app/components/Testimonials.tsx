@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const testimonials = [
   {
@@ -56,71 +56,11 @@ const testimonials = [
   },
 ];
 
-const INTERVAL = 6500;
+// Triple the array so there's always content filling the track
+const track = [...testimonials, ...testimonials, ...testimonials];
 
 export default function Testimonials() {
-  const [pos, setPos] = useState(0);
-  const [perView, setPerView] = useState(3);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const [fillKey, setFillKey] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const total = testimonials.length;
-
-  const updatePerView = useCallback(() => {
-    const w = window.innerWidth;
-    setPerView(w < 700 ? 1 : w < 1000 ? 2 : 3);
-  }, []);
-
-  useEffect(() => {
-    updatePerView();
-    window.addEventListener("resize", updatePerView);
-    return () => window.removeEventListener("resize", updatePerView);
-  }, [updatePerView]);
-
-  const go = useCallback(
-    (dir: 1 | -1) => {
-      if (isAnimating) return;
-      setIsAnimating(true);
-      setPos((p) => ((p + dir + total) % total));
-      setFillKey((k) => k + 1);
-      setTimeout(() => setIsAnimating(false), 600);
-    },
-    [isAnimating, total]
-  );
-
-  const goTo = useCallback(
-    (i: number) => {
-      if (isAnimating || i === pos) return;
-      setIsAnimating(true);
-      setPos(i);
-      setFillKey((k) => k + 1);
-      setTimeout(() => setIsAnimating(false), 600);
-    },
-    [isAnimating, pos]
-  );
-
-  const startTimer = useCallback(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => go(1), INTERVAL);
-  }, [go]);
-
-  const stopTimer = useCallback(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!isPaused) startTimer();
-    else stopTimer();
-    return stopTimer;
-  }, [isPaused, startTimer, stopTimer]);
-
-  const visibleCards = Array.from({ length: perView }, (_, i) => testimonials[(pos + i) % total]);
-
-  const trackOffset = 0;
+  const [paused, setPaused] = useState(false);
 
   return (
     <section
@@ -150,8 +90,9 @@ export default function Testimonials() {
           background: "radial-gradient(circle, rgba(212,165,116,.08), transparent 60%)",
         }}
       />
-      <div className="max-w-[1280px] mx-auto px-5 md:px-8 relative z-[1]">
-        <div className="text-center max-w-[720px] mx-auto mb-[60px]">
+
+      <div className="max-w-[1280px] mx-auto px-5 md:px-8 relative z-[1] mb-[52px]">
+        <div className="text-center max-w-[720px] mx-auto">
           <span className="eyebrow" style={{ justifyContent: "center" }}>Client voices</span>
           <h2
             className="mt-[18px]"
@@ -168,164 +109,101 @@ export default function Testimonials() {
             <em className="not-italic" style={{ color: "var(--champagne)" }}>earned engagement by engagement.</em>
           </h2>
         </div>
+      </div>
+
+      {/* Scroll track — full viewport width, edge-to-edge */}
+      <div
+        className="relative overflow-hidden"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {/* Fade masks on edges */}
+        <div className="absolute inset-y-0 left-0 w-8 sm:w-24 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, var(--navy-900), transparent)" }} />
+        <div className="absolute inset-y-0 right-0 w-8 sm:w-24 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to left, var(--navy-800), transparent)" }} />
 
         <div
-          className={`testi-frame relative ${isPaused ? "paused" : ""}`}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
+          className="flex gap-5 py-3"
+          style={{
+            width: "max-content",
+            animation: "testi-scroll 36s linear infinite",
+            animationPlayState: paused ? "paused" : "running",
+          }}
         >
-          {/* Meta row */}
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center gap-[14px]">
-              <span className="w-9 h-px" style={{ background: "rgba(212,165,116,.4)" }} />
+          {track.map((testi, i) => (
+            <article
+              key={i}
+              className="rounded-[22px] px-[28px] py-[30px] backdrop-blur-sm flex flex-col gap-[14px] flex-shrink-0 hover:-translate-y-1 transition-transform duration-300"
+              style={{
+                width: "min(360px, 80vw)",
+                minHeight: 320,
+                background: "rgba(255,255,255,.04)",
+                border: "1px solid rgba(255,255,255,.09)",
+              }}
+            >
+              <div style={{ color: "var(--champagne)", letterSpacing: "0.18em", fontSize: "0.95rem", lineHeight: 1 }}>
+                {"★".repeat(testi.stars)}
+              </div>
               <span
+                className="self-start rounded-full px-[11px] py-[5px]"
                 style={{
                   fontFamily: "var(--font-jetbrains-mono)",
-                  fontSize: "0.68rem",
+                  fontSize: "0.6rem",
                   letterSpacing: "0.22em",
                   textTransform: "uppercase",
                   color: "var(--champagne)",
+                  background: "rgba(212,165,116,.1)",
+                  border: "1px solid rgba(212,165,116,.25)",
+                  marginTop: -4,
                 }}
               >
-                Verified reviews
+                {testi.label}
               </span>
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--font-jetbrains-mono)",
-                fontSize: "0.78rem",
-                letterSpacing: "0.15em",
-                color: "rgba(255,255,255,.55)",
-              }}
-            >
-              <span
-                className="transition-opacity duration-300"
-                style={{ color: "var(--paper)", fontWeight: 600, fontSize: "0.92rem" }}
-              >
-                {String(pos + 1).padStart(2, "0")}
-              </span>{" "}
-              <span style={{ opacity: 0.4 }}>/</span>{" "}
-              <span>0{total}</span>
-            </div>
-          </div>
-
-          {/* Cards */}
-          <div
-            className="grid gap-5 transition-all duration-[600ms]"
-            style={{ gridTemplateColumns: `repeat(${perView}, 1fr)` }}
-          >
-            {visibleCards.map((testi, i) => (
-              <article
-                key={`${pos}-${i}`}
-                className="rounded-[22px] px-[30px] py-[34px] backdrop-blur-sm flex flex-col gap-[14px] transition-all duration-[400ms] min-h-[380px] hover:-translate-y-1"
+              <blockquote
+                className="flex-1 mt-1"
                 style={{
-                  background: "rgba(255,255,255,.04)",
-                  border: "1px solid rgba(255,255,255,.09)",
-                  flexShrink: 0,
-                  animation: "fadeIn 0.4s ease both",
+                  fontFamily: "var(--font-manrope)",
+                  fontWeight: 400,
+                  fontSize: "0.98rem",
+                  lineHeight: 1.55,
+                  letterSpacing: "-0.005em",
+                  color: "rgba(255,255,255,.92)",
                 }}
               >
-                <div style={{ color: "var(--champagne)", letterSpacing: "0.18em", fontSize: "0.98rem", lineHeight: 1 }}>
-                  {"★".repeat(testi.stars)}
-                </div>
-                <span
-                  className="self-start rounded-full px-[11px] py-[5px]"
-                  style={{
-                    fontFamily: "var(--font-jetbrains-mono)",
-                    fontSize: "0.6rem",
-                    letterSpacing: "0.22em",
-                    textTransform: "uppercase",
-                    color: "var(--champagne)",
-                    background: "rgba(212,165,116,.1)",
-                    border: "1px solid rgba(212,165,116,.25)",
-                    marginTop: -4,
-                  }}
-                >
-                  {testi.label}
-                </span>
-                <blockquote
-                  className="flex-1 mt-1"
-                  style={{
-                    fontFamily: "var(--font-manrope)",
-                    fontWeight: 400,
-                    fontSize: "1.02rem",
-                    lineHeight: 1.55,
-                    letterSpacing: "-0.005em",
-                    color: "rgba(255,255,255,.92)",
-                  }}
-                >
-                  {testi.quote}
-                </blockquote>
-                <div
-                  className="flex items-center gap-[14px] pt-[18px]"
-                  style={{ borderTop: "1px solid rgba(255,255,255,.1)" }}
-                >
-                  <div
-                    className="w-11 h-11 rounded-full grid place-items-center flex-shrink-0"
-                    style={{
-                      background: "linear-gradient(135deg, var(--blue-400), var(--navy-500))",
-                      fontFamily: "var(--font-manrope)",
-                      fontWeight: 600,
-                      color: "var(--paper)",
-                      fontSize: "1rem",
-                    }}
-                  >
-                    {testi.initial}
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 500, fontSize: "0.95rem", color: "var(--paper)" }}>{testi.name}</div>
-                    <div style={{ fontSize: "0.78rem", color: "rgba(255,255,255,.55)", letterSpacing: "0.02em", marginTop: 2 }}>{testi.role}</div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          {/* Controls */}
-          <div className="mt-9 grid gap-6 items-center" style={{ gridTemplateColumns: "auto 1fr auto" }}>
-            <div className="flex gap-2 items-center">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => { goTo(i); }}
-                  aria-label={`Go to slide ${i + 1}`}
-                  className={`testi-dot transition-all duration-[400ms] ${i === pos ? "active" : ""}`}
-                />
-              ))}
-            </div>
-            <div className="h-[2px] rounded-full overflow-hidden relative" style={{ background: "rgba(255,255,255,.08)" }}>
+                {testi.quote}
+              </blockquote>
               <div
-                key={fillKey}
-                className="testi-progress-fill run"
-                style={{ "--testi-interval": `${INTERVAL}ms` } as React.CSSProperties}
-              />
-            </div>
-            <div className="flex gap-[10px]">
-              <button
-                onClick={() => { go(-1); }}
-                aria-label="Previous testimonial"
-                className="w-11 h-11 rounded-full grid place-items-center border border-white/20 bg-transparent text-[var(--paper)] cursor-pointer transition-all duration-300 hover:bg-[var(--champagne)] hover:border-[var(--champagne)] hover:text-[var(--navy-900)]"
+                className="flex items-center gap-[14px] pt-[16px]"
+                style={{ borderTop: "1px solid rgba(255,255,255,.1)" }}
               >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
-                  <path d="M19 12H5m6-6-6 6 6 6" />
-                </svg>
-              </button>
-              <button
-                onClick={() => { go(1); }}
-                aria-label="Next testimonial"
-                className="w-11 h-11 rounded-full grid place-items-center border border-white/20 bg-transparent text-[var(--paper)] cursor-pointer transition-all duration-300 hover:bg-[var(--champagne)] hover:border-[var(--champagne)] hover:text-[var(--navy-900)]"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
-                  <path d="M5 12h14m-6-6 6 6-6 6" />
-                </svg>
-              </button>
-            </div>
-          </div>
+                <div
+                  className="w-10 h-10 rounded-full grid place-items-center flex-shrink-0"
+                  style={{
+                    background: "linear-gradient(135deg, var(--blue-400), var(--navy-500))",
+                    fontFamily: "var(--font-manrope)",
+                    fontWeight: 600,
+                    color: "var(--paper)",
+                    fontSize: "0.95rem",
+                  }}
+                >
+                  {testi.initial}
+                </div>
+                <div>
+                  <div style={{ fontWeight: 500, fontSize: "0.92rem", color: "var(--paper)" }}>{testi.name}</div>
+                  <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,.55)", letterSpacing: "0.02em", marginTop: 2 }}>{testi.role}</div>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
 
       <style>{`
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        @keyframes testi-scroll {
+          0%   { transform: translateX(-33.333%); }
+          100% { transform: translateX(0%); }
+        }
       `}</style>
     </section>
   );

@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const navLinks = [
@@ -35,27 +36,15 @@ export default function Nav() {
             className="flex items-center gap-[10px] text-[var(--paper)] no-underline"
             onClick={close}
           >
-            <div
-              className="w-[34px] h-[34px] rounded-full flex items-center justify-center text-[var(--navy-900)] flex-shrink-0"
-              style={{
-                background: "linear-gradient(135deg, var(--champagne), var(--champagne-soft))",
-                fontFamily: "var(--font-instrument-serif)",
-                fontSize: "1.2rem",
-                fontStyle: "italic",
-              }}
-            >
-              D
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--font-manrope)",
-                fontSize: "1.1rem",
-                fontWeight: 600,
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Dre<em className="not-italic text-[var(--champagne)] font-bold">X</em> CFO
-            </div>
+            <Image
+              src="/Logo 2.png"
+              alt="DreX CFO"
+              width={200}
+              height={115}
+              className="object-contain"
+              style={{ height: 115, width: "auto" }}
+              priority
+            />
           </a>
 
           {/* Desktop nav */}
