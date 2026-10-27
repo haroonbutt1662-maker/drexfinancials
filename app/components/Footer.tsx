@@ -82,7 +82,7 @@ export default function Footer() {
             {[
               { label: "About", href: "#about" },
               { label: "How it works", href: "#process" },
-              { label: "Team", href: "#team" },
+              { label: "For Firms", href: "/for-firms" },
               { label: "Client work", href: "#testimonials" },
             ].map((link) => (
               <a

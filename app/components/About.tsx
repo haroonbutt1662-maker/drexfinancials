@@ -1,68 +1,102 @@
+import type React from "react";
+import Image from "next/image";
 import Reveal from "./Reveal";
 
-function FactBlock({
-  label,
-  value,
-  sub,
-  highlight = false,
-}: {
-  label: string;
-  value: string;
-  sub?: string;
-  highlight?: boolean;
-}) {
+const ORBIT_SERVICES = [
+  { label: "Fractional CFO",     style: { top: "6%",  left: "50%",  transform: "translateX(-50%)" } as React.CSSProperties },
+  { label: "Accounting",         style: { top: "35%", right: "1%"  } as React.CSSProperties },
+  { label: "Audit Readiness",    style: { top: "77%", right: "6%"  } as React.CSSProperties },
+  { label: "Financial Packages", style: { top: "77%", left:  "1%"  } as React.CSSProperties },
+  { label: "Financial Modelling",style: { top: "35%", left:  "1%"  } as React.CSSProperties },
+];
+
+function OrbitPreview() {
   return (
-    <div
-      className={`px-[22px] py-5 relative ${
-        highlight
-          ? "rounded-[18px] my-[6px] border"
-          : "border-b last:border-b-0"
-      }`}
-      style={
-        highlight
-          ? {
-              background: "var(--paper)",
-              borderColor: "rgba(212,165,116,.45)",
-              boxShadow: "0 8px 24px rgba(212,165,116,.08)",
-            }
-          : {
-              borderColor: "rgba(11,30,63,.06)",
-            }
-      }
-    >
-      <span
-        className="block mb-2"
+    <div className="relative w-full mx-auto" style={{ aspectRatio: "1/1", maxWidth: 460 }}>
+      {/* SVG: orbit ring + dashed lines + node dots */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 480 480"
+        aria-hidden="true"
+      >
+        <defs>
+          <marker id="ab-arr" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M0,1.5 L8.5,5 L0,8.5 Z" fill="rgba(212,165,116,0.65)" />
+          </marker>
+        </defs>
+        {/* Orbit ring */}
+        <circle cx="240" cy="240" r="170" fill="none"
+          stroke="rgba(212,165,116,0.12)" strokeWidth="1" strokeDasharray="3 7" />
+        {/* Subtle glow behind center */}
+        <circle cx="240" cy="240" r="80" fill="rgba(212,165,116,0.04)" />
+        {/* Lines from circle edge toward each node (stop ~12px before node) */}
+        <g fill="none" stroke="rgba(212,165,116,0.45)" strokeWidth="1.2" strokeDasharray="4 5">
+          {/* Top */}
+          <line x1="240" y1="175" x2="240" y2="82" markerEnd="url(#ab-arr)" />
+          {/* Upper-right */}
+          <line x1="302" y1="220" x2="391" y2="191" markerEnd="url(#ab-arr)" />
+          {/* Lower-right */}
+          <line x1="278" y1="293" x2="333" y2="368" markerEnd="url(#ab-arr)" />
+          {/* Lower-left */}
+          <line x1="202" y1="293" x2="147" y2="368" markerEnd="url(#ab-arr)" />
+          {/* Upper-left */}
+          <line x1="178" y1="220" x2="89" y2="191" markerEnd="url(#ab-arr)" />
+        </g>
+        {/* Node dots */}
+        <g fill="rgba(212,165,116,0.75)">
+          <circle cx="240" cy="70"  r="4.5" />
+          <circle cx="402" cy="187" r="4.5" />
+          <circle cx="340" cy="378" r="4.5" />
+          <circle cx="140" cy="378" r="4.5" />
+          <circle cx="78"  cy="187" r="4.5" />
+        </g>
+      </svg>
+
+      {/* Service labels near each node */}
+      {ORBIT_SERVICES.map((s) => (
+        <div key={s.label} className="absolute" style={{ ...s.style, zIndex: 2 }}>
+          <span
+            className="block whitespace-nowrap rounded-full px-3 py-[5px]"
+            style={{
+              fontFamily: "var(--font-jetbrains-mono)",
+              fontSize: "0.55rem",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--champagne)",
+              background: "rgba(212,165,116,0.08)",
+              border: "1px solid rgba(212,165,116,0.22)",
+            }}
+          >
+            {s.label}
+          </span>
+        </div>
+      ))}
+
+      {/* Center circle with logo */}
+      <div
+        className="absolute grid place-items-center"
         style={{
-          fontFamily: "var(--font-jetbrains-mono)",
-          fontSize: "0.6rem",
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          color: highlight ? "var(--champagne)" : "var(--muted)",
+          top: "50%", left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 130, height: 130,
+          borderRadius: "50%",
+          background: "var(--navy-900)",
+          border: "1px solid rgba(212,165,116,.3)",
+          boxShadow: "0 20px 60px rgba(6,21,46,.35), 0 0 0 12px rgba(212,165,116,.04)",
+          zIndex: 3,
         }}
       >
-        {label}
-      </span>
-      <strong
-        className="block"
-        style={{
-          fontFamily: "var(--font-manrope)",
-          fontWeight: 600,
-          fontSize: "0.98rem",
-          color: "var(--navy-900)",
-          letterSpacing: "-0.01em",
-          lineHeight: 1.35,
-        }}
-      >
-        {value}
-      </strong>
-      {sub && (
-        <small
-          className="block mt-[6px]"
-          style={{ fontSize: "0.8rem", color: "var(--muted)", lineHeight: 1.5, fontWeight: 400 }}
-        >
-          {sub}
-        </small>
-      )}
+        <Image
+          src="/Logo2.png"
+          alt="DreX CFO"
+          width={88}
+          height={88}
+          quality={100}
+          className="object-contain"
+          style={{ width: 88, height: 88 }}
+        />
+      </div>
     </div>
   );
 }
@@ -324,35 +358,8 @@ export default function About() {
             </p>
           </Reveal>
 
-          <Reveal delay="d2">
-            <aside
-              className="grid gap-0 rounded-[24px] p-[6px] md:sticky top-[20px]"
-              style={{
-                background: "var(--cream)",
-                border: "1px solid rgba(11,30,63,.05)",
-              }}
-            >
-              <FactBlock label="Founded" value="2025 · London, UK" />
-              <FactBlock
-                label="Founder"
-                value="Haroon — ACCA, CFA"
-                sub="10+ years across accounting, valuation, and strategic advisory"
-              />
-              <FactBlock
-                label="Sectors served"
-                value="Technology, retail, professional services, healthcare & more"
-              />
-              <FactBlock
-                label="Engagement model"
-                value="Fractional · Project · Fixed package"
-              />
-              <FactBlock
-                label="Coverage"
-                value="UK & international"
-                sub="Remote-first · in-person available across Greater London"
-                highlight
-              />
-            </aside>
+          <Reveal delay="d2" className="flex justify-center md:justify-end">
+            <OrbitPreview />
           </Reveal>
         </div>
       </div>
