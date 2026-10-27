@@ -2,21 +2,23 @@ import type React from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
 
+// viewBox 480×620 — taller than wide so the orbit spans the full text column height
+// Center at (240, 310) = 50% / 50% of viewBox
 const ORBIT_SERVICES = [
-  { label: "Fractional CFO",     style: { top: "6%",  left: "50%",  transform: "translateX(-50%)" } as React.CSSProperties },
-  { label: "Accounting",         style: { top: "35%", right: "1%"  } as React.CSSProperties },
-  { label: "Audit Readiness",    style: { top: "77%", right: "6%"  } as React.CSSProperties },
+  { label: "Fractional CFO",     style: { top: "11%", left: "50%",  transform: "translateX(-50%)" } as React.CSSProperties },
+  { label: "Accounting",         style: { top: "37%", right: "1%"  } as React.CSSProperties },
+  { label: "Audit Readiness",    style: { top: "77%", right: "2%"  } as React.CSSProperties },
   { label: "Financial Packages", style: { top: "77%", left:  "1%"  } as React.CSSProperties },
-  { label: "Financial Modelling",style: { top: "35%", left:  "1%"  } as React.CSSProperties },
+  { label: "Financial Modelling",style: { top: "37%", left:  "1%"  } as React.CSSProperties },
 ];
 
 function OrbitPreview() {
   return (
-    <div className="relative w-full mx-auto" style={{ aspectRatio: "1/1", maxWidth: 460 }}>
+    <div className="relative w-full" style={{ aspectRatio: "480/620", maxWidth: 480 }}>
       {/* SVG: orbit ring + dashed lines + node dots */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 480 480"
+        viewBox="0 0 480 620"
         aria-hidden="true"
       >
         <defs>
@@ -26,30 +28,30 @@ function OrbitPreview() {
           </marker>
         </defs>
         {/* Orbit ring */}
-        <circle cx="240" cy="240" r="170" fill="none"
+        <circle cx="240" cy="310" r="220" fill="none"
           stroke="rgba(212,165,116,0.12)" strokeWidth="1" strokeDasharray="3 7" />
         {/* Subtle glow behind center */}
-        <circle cx="240" cy="240" r="80" fill="rgba(212,165,116,0.04)" />
-        {/* Lines from circle edge toward each node (stop ~12px before node) */}
+        <circle cx="240" cy="310" r="80" fill="rgba(212,165,116,0.04)" />
+        {/* Lines: circle edge → ~12px before each node */}
         <g fill="none" stroke="rgba(212,165,116,0.45)" strokeWidth="1.2" strokeDasharray="4 5">
           {/* Top */}
-          <line x1="240" y1="175" x2="240" y2="82" markerEnd="url(#ab-arr)" />
+          <line x1="240" y1="245" x2="240" y2="102" markerEnd="url(#ab-arr)" />
           {/* Upper-right */}
-          <line x1="302" y1="220" x2="391" y2="191" markerEnd="url(#ab-arr)" />
+          <line x1="302" y1="290" x2="438" y2="246" markerEnd="url(#ab-arr)" />
           {/* Lower-right */}
-          <line x1="278" y1="293" x2="333" y2="368" markerEnd="url(#ab-arr)" />
+          <line x1="278" y1="363" x2="362" y2="478" markerEnd="url(#ab-arr)" />
           {/* Lower-left */}
-          <line x1="202" y1="293" x2="147" y2="368" markerEnd="url(#ab-arr)" />
+          <line x1="202" y1="363" x2="118" y2="478" markerEnd="url(#ab-arr)" />
           {/* Upper-left */}
-          <line x1="178" y1="220" x2="89" y2="191" markerEnd="url(#ab-arr)" />
+          <line x1="178" y1="290" x2="42"  y2="246" markerEnd="url(#ab-arr)" />
         </g>
         {/* Node dots */}
         <g fill="rgba(212,165,116,0.75)">
-          <circle cx="240" cy="70"  r="4.5" />
-          <circle cx="402" cy="187" r="4.5" />
-          <circle cx="340" cy="378" r="4.5" />
-          <circle cx="140" cy="378" r="4.5" />
-          <circle cx="78"  cy="187" r="4.5" />
+          <circle cx="240" cy="90"  r="4.5" />
+          <circle cx="449" cy="242" r="4.5" />
+          <circle cx="369" cy="488" r="4.5" />
+          <circle cx="111" cy="488" r="4.5" />
+          <circle cx="31"  cy="242" r="4.5" />
         </g>
       </svg>
 
@@ -73,7 +75,7 @@ function OrbitPreview() {
         </div>
       ))}
 
-      {/* Center circle with logo */}
+      {/* Center circle with logo — at 50%/50% since center=(240,310) in 480×620 */}
       <div
         className="absolute grid place-items-center"
         style={{
@@ -327,7 +329,7 @@ export default function About() {
   return (
     <section id="about" className="pt-8 md:pt-[140px]" style={{ background: "var(--paper)" }}>
       <div className="max-w-[1280px] mx-auto px-5 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-20 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-20 items-start">
           <Reveal className="about-story">
             <span className="eyebrow">About / Our story</span>
             <h2
@@ -358,7 +360,7 @@ export default function About() {
             </p>
           </Reveal>
 
-          <Reveal delay="d2" className="flex justify-center md:justify-end">
+          <Reveal delay="d2">
             <OrbitPreview />
           </Reveal>
         </div>
