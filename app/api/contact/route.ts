@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail({
       from: `"DreX CFO Website" <${process.env.GMAIL_USER}>`,
-      to: "haroonbutt1662@gmail.com",
+      to: "Haroon1662@drexfinancialadvisors.com",
       replyTo: email,
       subject: `New consultation request — ${name}${company ? ` · ${company}` : ""}`,
       html: `

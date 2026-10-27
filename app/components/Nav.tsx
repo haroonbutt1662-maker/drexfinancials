@@ -6,7 +6,7 @@ const navLinks = [
   { href: "#about", label: "About" },
   { href: "#services", label: "Services" },
   { href: "#process", label: "How it works" },
-  { href: "#team", label: "Team" },
+  { href: "#for-firms", label: "For Firms" },
 ];
 
 export default function Nav() {

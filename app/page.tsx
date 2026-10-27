@@ -6,7 +6,7 @@ import Services from "./components/Services";
 import Process from "./components/Process";
 import WhyUs from "./components/WhyUs";
 import Testimonials from "./components/Testimonials";
-import Team from "./components/Team";
+
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
@@ -57,20 +57,6 @@ export default function Page() {
       />
 
       <Testimonials />
-
-      {/* navy → paper */}
-      <SectionDivider
-        from="#06152E"
-        layers={["#102A56", "#3D5A88", "#A8B6CC", "#FBFAF7"]}
-      />
-
-      <Team />
-
-      {/* paper → navy */}
-      <SectionDivider
-        from="#FBFAF7"
-        layers={["#D4D8D2", "#8FA4BE", "#3D5A88", "#06152E"]}
-      />
 
       <Contact />
 

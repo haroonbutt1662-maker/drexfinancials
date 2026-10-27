@@ -3,9 +3,10 @@ import { FormEvent, useState } from "react";
 import Reveal from "./Reveal";
 
 const contactInfo = [
-  { label: "Phone", value: "+44 7561 325182" },
-  { label: "Email", value: "haroonbutt1662@gmail.com" },
-  { label: "Location", value: "London, United Kingdom" },
+  { label: "Phone (UK)", value: "+44 7561 325182" },
+  { label: "Phone (US)", value: "+1 469-955-3570" },
+  { label: "Email", value: "Haroon1662@drexfinancialadvisors.com" },
+  { label: "Location", value: "London · Dallas, Texas" },
   { label: "Hours", value: "Monday – Friday · 9am – 6pm GMT" },
 ];
 

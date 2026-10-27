@@ -112,8 +112,8 @@ export default function Footer() {
             </h4>
             {[
               { label: "+44 7561 325182", href: "tel:+447561325182" },
-              { label: "haroonbutt1662@gmail.com", href: "mailto:haroonbutt1662@gmail.com" },
-              { label: "London, UK", href: "#" },
+              { label: "Haroon1662@drexfinancialadvisors.com", href: "mailto:Haroon1662@drexfinancialadvisors.com" },
+              { label: "London · Dallas, Texas", href: "#" },
               { label: "Book a call →", href: "#contact" },
             ].map((link) => (
               <a
