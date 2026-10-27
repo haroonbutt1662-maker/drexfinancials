@@ -15,7 +15,31 @@ const ORBIT_SERVICES = [
 function OrbitPreview() {
   return (
     <div className="relative w-full" style={{ aspectRatio: "480/620", maxWidth: 480 }}>
-      {/* SVG: orbit ring + dashed lines + node dots */}
+      <style>{`
+        @keyframes ao-spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes ao-glow {
+          0%, 100% { opacity: 0.07; }
+          50%       { opacity: 0.22; }
+        }
+        @keyframes ao-line-flow {
+          from { stroke-dashoffset: 18; }
+          to   { stroke-dashoffset: 0; }
+        }
+        .ao-ring {
+          transform-origin: 240px 310px;
+          animation: ao-spin 55s linear infinite;
+        }
+        .ao-glow { animation: ao-glow 3.2s ease-in-out infinite; }
+        .ao-line { animation: ao-line-flow 2.4s linear infinite; }
+        .ao-line-2 { animation: ao-line-flow 2.4s linear infinite 0.48s; }
+        .ao-line-3 { animation: ao-line-flow 2.4s linear infinite 0.96s; }
+        .ao-line-4 { animation: ao-line-flow 2.4s linear infinite 1.44s; }
+        .ao-line-5 { animation: ao-line-flow 2.4s linear infinite 1.92s; }
+      `}</style>
+
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
         viewBox="0 0 480 620"
@@ -24,50 +48,60 @@ function OrbitPreview() {
         <defs>
           <marker id="ab-arr" viewBox="0 0 10 10" refX="8" refY="5"
             markerWidth="5" markerHeight="5" orient="auto" markerUnits="userSpaceOnUse">
-            <path d="M0,1.5 L8.5,5 L0,8.5 Z" fill="rgba(212,165,116,0.65)" />
+            <path d="M0,1.5 L8.5,5 L0,8.5 Z" fill="#D4A574" />
           </marker>
         </defs>
-        {/* Orbit ring */}
-        <circle cx="240" cy="310" r="220" fill="none"
-          stroke="rgba(212,165,116,0.12)" strokeWidth="1" strokeDasharray="3 7" />
-        {/* Subtle glow behind center */}
-        <circle cx="240" cy="310" r="80" fill="rgba(212,165,116,0.04)" />
-        {/* Lines: circle edge → ~12px before each node */}
-        <g fill="none" stroke="rgba(212,165,116,0.45)" strokeWidth="1.2" strokeDasharray="4 5">
-          {/* Top */}
-          <line x1="240" y1="245" x2="240" y2="102" markerEnd="url(#ab-arr)" />
-          {/* Upper-right */}
-          <line x1="302" y1="290" x2="438" y2="246" markerEnd="url(#ab-arr)" />
-          {/* Lower-right */}
-          <line x1="278" y1="363" x2="362" y2="478" markerEnd="url(#ab-arr)" />
-          {/* Lower-left */}
-          <line x1="202" y1="363" x2="118" y2="478" markerEnd="url(#ab-arr)" />
-          {/* Upper-left */}
-          <line x1="178" y1="290" x2="42"  y2="246" markerEnd="url(#ab-arr)" />
-        </g>
-        {/* Node dots */}
-        <g fill="rgba(212,165,116,0.75)">
-          <circle cx="240" cy="90"  r="4.5" />
-          <circle cx="449" cy="242" r="4.5" />
-          <circle cx="369" cy="488" r="4.5" />
-          <circle cx="111" cy="488" r="4.5" />
-          <circle cx="31"  cy="242" r="4.5" />
-        </g>
+
+        {/* Spinning orbit ring */}
+        <circle className="ao-ring" cx="240" cy="310" r="220" fill="none"
+          stroke="rgba(212,165,116,0.25)" strokeWidth="1.2" strokeDasharray="5 8" />
+
+        {/* Breathing glow behind center */}
+        <circle className="ao-glow" cx="240" cy="310" r="90" fill="rgba(212,165,116,1)" />
+
+        {/* Flowing dashed lines — staggered so each fires in sequence */}
+        <line className="ao-line"   x1="240" y1="245" x2="240" y2="102"
+          fill="none" stroke="#D4A574" strokeWidth="1.4" strokeDasharray="4 5" markerEnd="url(#ab-arr)" />
+        <line className="ao-line-2" x1="302" y1="290" x2="438" y2="246"
+          fill="none" stroke="#D4A574" strokeWidth="1.4" strokeDasharray="4 5" markerEnd="url(#ab-arr)" />
+        <line className="ao-line-3" x1="278" y1="363" x2="362" y2="478"
+          fill="none" stroke="#D4A574" strokeWidth="1.4" strokeDasharray="4 5" markerEnd="url(#ab-arr)" />
+        <line className="ao-line-4" x1="202" y1="363" x2="118" y2="478"
+          fill="none" stroke="#D4A574" strokeWidth="1.4" strokeDasharray="4 5" markerEnd="url(#ab-arr)" />
+        <line className="ao-line-5" x1="178" y1="290" x2="42"  y2="246"
+          fill="none" stroke="#D4A574" strokeWidth="1.4" strokeDasharray="4 5" markerEnd="url(#ab-arr)" />
+
+        {/* Pulsing node dots — staggered via SMIL */}
+        {([
+          { cx: 240, cy: 90,  delay: "0s"    },
+          { cx: 449, cy: 242, delay: "0.48s" },
+          { cx: 369, cy: 488, delay: "0.96s" },
+          { cx: 111, cy: 488, delay: "1.44s" },
+          { cx: 31,  cy: 242, delay: "1.92s" },
+        ] as { cx: number; cy: number; delay: string }[]).map((n) => (
+          <circle key={`${n.cx}-${n.cy}`} cx={n.cx} cy={n.cy} r="5" fill="#D4A574">
+            <animate attributeName="r"
+              values="5;8;5" dur="2.4s" begin={n.delay} repeatCount="indefinite" />
+            <animate attributeName="opacity"
+              values="0.85;1;0.85" dur="2.4s" begin={n.delay} repeatCount="indefinite" />
+          </circle>
+        ))}
       </svg>
 
-      {/* Service labels near each node */}
+      {/* Service labels — dark pill for contrast on cream background */}
       {ORBIT_SERVICES.map((s) => (
         <div key={s.label} className="absolute" style={{ ...s.style, zIndex: 2 }}>
           <span
-            className="block whitespace-nowrap rounded-full px-3 py-[5px]"
+            className="block whitespace-nowrap rounded-full px-3 py-[6px]"
             style={{
               fontFamily: "var(--font-jetbrains-mono)",
-              fontSize: "0.55rem",
-              letterSpacing: "0.14em",
+              fontSize: "0.58rem",
+              letterSpacing: "0.13em",
               textTransform: "uppercase",
-              color: "var(--champagne)",
-              background: "rgba(212,165,116,0.08)",
-              border: "1px solid rgba(212,165,116,0.22)",
+              color: "#D4A574",
+              background: "#0B1E3F",
+              border: "1px solid rgba(212,165,116,0.45)",
+              boxShadow: "0 2px 12px rgba(6,21,46,0.18)",
             }}
           >
             {s.label}
@@ -75,7 +109,7 @@ function OrbitPreview() {
         </div>
       ))}
 
-      {/* Center circle with logo — at 50%/50% since center=(240,310) in 480×620 */}
+      {/* Center logo circle */}
       <div
         className="absolute grid place-items-center"
         style={{
@@ -84,8 +118,8 @@ function OrbitPreview() {
           width: 130, height: 130,
           borderRadius: "50%",
           background: "var(--navy-900)",
-          border: "1px solid rgba(212,165,116,.3)",
-          boxShadow: "0 20px 60px rgba(6,21,46,.35), 0 0 0 12px rgba(212,165,116,.04)",
+          border: "1px solid rgba(212,165,116,.45)",
+          boxShadow: "0 20px 60px rgba(6,21,46,.4), 0 0 0 14px rgba(212,165,116,.06)",
           zIndex: 3,
         }}
       >
