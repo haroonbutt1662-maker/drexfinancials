@@ -74,22 +74,24 @@ export default function HowWeDeliverPage() {
       {/* Hero */}
       <section
         className="relative overflow-hidden pt-[160px] pb-16 md:pb-[100px]"
-        style={{ background: "var(--paper)" }}
+        style={{ background: "var(--navy-900)", color: "var(--paper)" }}
       >
-        <div className="max-w-[1280px] mx-auto px-5 md:px-8">
-          <Reveal>
-            <span className="eyebrow">How We Deliver</span>
-            <h1
-              className="mt-[18px] mb-6"
-              style={{ fontFamily: "var(--font-manrope)", fontWeight: 600, fontSize: "clamp(2.2rem, 5vw, 4rem)", lineHeight: 1.03, letterSpacing: "-0.04em", color: "var(--navy-900)", maxWidth: "20ch" }}
-            >
-              People, process and{" "}
-              <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>AI-assisted tooling.</em>
-            </h1>
-            <p className="mb-8" style={{ color: "var(--muted)", fontSize: "1.02rem", lineHeight: 1.75, maxWidth: 580 }}>
-              We do not automate your finance function. We use AI to handle the high-volume, low-judgment work — so our senior team spends their time where it matters.
-            </p>
-          </Reveal>
+        <div
+          className="absolute pointer-events-none"
+          style={{ top: -200, right: -100, width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle, rgba(212,165,116,.07), transparent 60%)" }}
+        />
+        <div className="max-w-[1280px] mx-auto px-5 md:px-8 relative z-[2]">
+          <span className="eyebrow">How We Deliver</span>
+          <h1
+            className="mt-[18px] mb-6"
+            style={{ fontFamily: "var(--font-manrope)", fontWeight: 600, fontSize: "clamp(2.2rem, 5vw, 4rem)", lineHeight: 1.03, letterSpacing: "-0.04em", color: "var(--paper)", maxWidth: "20ch" }}
+          >
+            People, process and{" "}
+            <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>AI-assisted tooling.</em>
+          </h1>
+          <p className="mb-8" style={{ color: "rgba(255,255,255,.75)", fontSize: "1.02rem", lineHeight: 1.75, maxWidth: 580 }}>
+            We do not automate your finance function. We use AI to handle the high-volume, low-judgment work — so our senior team spends their time where it matters.
+          </p>
         </div>
       </section>
 

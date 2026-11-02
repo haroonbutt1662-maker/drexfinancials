@@ -53,7 +53,7 @@ export default async function ContactPage({
         />
         <div className="max-w-[1280px] mx-auto px-5 md:px-8 relative z-[2]">
           <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-16 items-start">
-            <Reveal>
+            <div>
               <span className="eyebrow">Contact</span>
               <h1
                 className="mt-[18px] mb-5"
@@ -70,7 +70,7 @@ export default async function ContactPage({
                   ? "Advisory, accounting and private equity firms work with us to extend their capacity and deliver finance services to their clients under their brand."
                   : "Whether you are a growing business or an advisory firm, book a call and we will work out together what would make the most difference."}
               </p>
-            </Reveal>
+            </div>
 
             <Reveal delay="d1">
               <div className="flex flex-col gap-4">

@@ -67,8 +67,8 @@ export default function Services() {
                 color: "var(--paper)",
               }}
             >
-              Eight ways DreX{" "}
-              <em className="not-italic" style={{ color: "var(--champagne)" }}>moves your numbers.</em>
+              Our services,{" "}
+              <em className="not-italic" style={{ color: "var(--champagne)" }}>built to work together.</em>
             </h2>
           </Reveal>
           <Reveal delay="d1" className="hidden md:block">
@@ -77,7 +77,7 @@ export default function Services() {
                 Each engagement applies across all industries — technology, retail, professional services, and beyond. Built modularly, so you take exactly what you need.
               </p>
               <Link href="/services" className="btn btn-primary mt-5 inline-flex">
-                View all 8 services →
+                See all 8 services →
               </Link>
             </div>
           </Reveal>

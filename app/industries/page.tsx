@@ -77,19 +77,17 @@ export default function IndustriesPage() {
           style={{ top: -200, left: "50%", transform: "translateX(-50%)", width: 900, height: 900, borderRadius: "50%", background: "radial-gradient(circle, rgba(212,165,116,.06), transparent 60%)" }}
         />
         <div className="max-w-[1280px] mx-auto px-5 md:px-8 relative z-[2]">
-          <Reveal>
-            <span className="eyebrow">Industries</span>
-            <h1
-              className="mt-[18px] mb-5"
-              style={{ fontFamily: "var(--font-manrope)", fontWeight: 600, fontSize: "clamp(2.2rem, 5vw, 4rem)", lineHeight: 1.03, letterSpacing: "-0.04em", color: "var(--paper)", maxWidth: "20ch" }}
-            >
-              Finance expertise for the sectors{" "}
-              <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>that drive growth.</em>
-            </h1>
-            <p className="mb-8" style={{ color: "rgba(255,255,255,.78)", fontSize: "1.02rem", lineHeight: 1.75, maxWidth: 560 }}>
-              We work across a range of industries. Each has its own financial drivers, reporting requirements and growth challenges. Our team brings both financial expertise and sector familiarity to every engagement.
-            </p>
-          </Reveal>
+          <span className="eyebrow">Industries</span>
+          <h1
+            className="mt-[18px] mb-5"
+            style={{ fontFamily: "var(--font-manrope)", fontWeight: 600, fontSize: "clamp(2.2rem, 5vw, 4rem)", lineHeight: 1.03, letterSpacing: "-0.04em", color: "var(--paper)", maxWidth: "20ch" }}
+          >
+            Finance expertise for the sectors{" "}
+            <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>that drive growth.</em>
+          </h1>
+          <p className="mb-8" style={{ color: "rgba(255,255,255,.78)", fontSize: "1.02rem", lineHeight: 1.75, maxWidth: 560 }}>
+            We work across a range of industries. Each has its own financial drivers, reporting requirements and growth challenges. Our team brings both financial expertise and sector familiarity to every engagement.
+          </p>
         </div>
       </section>
 

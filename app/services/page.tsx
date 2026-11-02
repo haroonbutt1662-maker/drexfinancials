@@ -14,6 +14,17 @@ export const metadata: Metadata = {
   },
 };
 
+const categories: Record<string, string> = {
+  "fractional-cfo": "Strategic · Ongoing",
+  "accounting": "Compliance · Ongoing",
+  "payables-receivables": "Operations · Ongoing",
+  "financial-modeling": "Strategic · Project",
+  "tax-compliance": "Compliance · Project",
+  "transaction-readiness": "M&A · Project",
+  "audit-readiness": "Compliance · Project",
+  "financial-packages": "Entry · Fixed scope",
+};
+
 export default function ServicesPage() {
   return (
     <main>
@@ -35,30 +46,28 @@ export default function ServicesPage() {
           }}
         />
         <div className="max-w-[1280px] mx-auto px-5 md:px-8 relative z-[2]">
-          <Reveal>
-            <span className="eyebrow">Services</span>
-            <h1
-              className="mt-[18px] mb-5"
-              style={{
-                fontFamily: "var(--font-manrope)",
-                fontWeight: 600,
-                fontSize: "clamp(2.4rem, 5.5vw, 4.4rem)",
-                lineHeight: 1.02,
-                letterSpacing: "-0.04em",
-                color: "var(--paper)",
-                maxWidth: "16ch",
-              }}
-            >
-              Eight ways DreX moves your{" "}
-              <em className="not-italic" style={{ color: "var(--champagne)" }}>numbers.</em>
-            </h1>
-            <p
-              className="mb-8"
-              style={{ color: "rgba(255,255,255,.72)", fontSize: "1.08rem", lineHeight: 1.7, maxWidth: 580 }}
-            >
-              Senior financial judgment, delivered by a dedicated team, with AI built into the process to make it faster.
-            </p>
-          </Reveal>
+          <span className="eyebrow">Services</span>
+          <h1
+            className="mt-[18px] mb-5"
+            style={{
+              fontFamily: "var(--font-manrope)",
+              fontWeight: 600,
+              fontSize: "clamp(2.4rem, 5.5vw, 4.4rem)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.04em",
+              color: "var(--paper)",
+              maxWidth: "16ch",
+            }}
+          >
+            Eight ways DreX moves your{" "}
+            <em className="not-italic" style={{ color: "var(--champagne)" }}>numbers.</em>
+          </h1>
+          <p
+            className="mb-8"
+            style={{ color: "rgba(255,255,255,.72)", fontSize: "1.08rem", lineHeight: 1.7, maxWidth: 580 }}
+          >
+            Senior financial judgment, delivered by a dedicated team, with AI built into the process to make it faster.
+          </p>
         </div>
       </section>
 
@@ -78,18 +87,33 @@ export default function ServicesPage() {
                       border: "1px solid rgba(11,30,63,.07)",
                     }}
                   >
-                    <span
-                      className="block mb-3"
-                      style={{
-                        fontFamily: "var(--font-jetbrains-mono)",
-                        fontSize: "0.6rem",
-                        letterSpacing: "0.2em",
-                        textTransform: "uppercase",
-                        color: "var(--champagne)",
-                      }}
-                    >
-                      {String(i + 1).padStart(2, "0")} · Service
-                    </span>
+                    <div className="flex items-center justify-between mb-3">
+                      <span
+                        style={{
+                          fontFamily: "var(--font-jetbrains-mono)",
+                          fontSize: "0.6rem",
+                          letterSpacing: "0.2em",
+                          textTransform: "uppercase",
+                          color: "var(--champagne)",
+                        }}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span
+                        className="rounded-full px-2 py-[3px]"
+                        style={{
+                          fontFamily: "var(--font-jetbrains-mono)",
+                          fontSize: "0.55rem",
+                          letterSpacing: "0.12em",
+                          textTransform: "uppercase",
+                          color: "var(--navy-500)",
+                          background: "rgba(11,30,63,.07)",
+                          border: "1px solid rgba(11,30,63,.1)",
+                        }}
+                      >
+                        {categories[svc.slug]}
+                      </span>
+                    </div>
                     <h2
                       className="mb-3 group-hover:text-[var(--navy-500)] transition-colors duration-300"
                       style={{

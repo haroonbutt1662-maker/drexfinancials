@@ -73,7 +73,7 @@ export default function ForFirmsPage() {
         />
         <div className="max-w-[1280px] mx-auto px-5 md:px-8 relative z-[2]">
           <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-10 md:gap-20 items-start">
-            <Reveal>
+            <div>
               <span className="eyebrow">For Advisory Firms</span>
               <h1
                 className="mt-[18px] mb-6"
@@ -95,7 +95,7 @@ export default function ForFirmsPage() {
                   How it works
                 </Link>
               </div>
-            </Reveal>
+            </div>
 
             <Reveal delay="d1">
               <div className="rounded-[28px] px-7 py-7" style={{ background: "rgba(255,255,255,.04)", border: "1px solid rgba(255,255,255,.1)" }}>

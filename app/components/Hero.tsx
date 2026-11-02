@@ -92,7 +92,7 @@ export default function Hero() {
           style={{ fontSize: "clamp(2.6rem, 5.8vw, 5.2rem)", lineHeight: 1.02, letterSpacing: "-0.04em", color: "var(--paper)" }}
         >
           Smarter financial <em className="not-italic text-[var(--champagne)]">leadership.</em>
-          <br />Automated. Always on.
+          <br />Precise. Always engaged.
         </h1>
         <p
           className="mb-3 font-light"

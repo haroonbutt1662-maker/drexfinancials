@@ -76,7 +76,7 @@ export default function AboutPage() {
       >
         <div className="max-w-[1280px] mx-auto px-5 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-10 md:gap-20 items-start">
-            <Reveal>
+            <div>
               <span className="eyebrow">About</span>
               <h1
                 className="mt-[18px] mb-6"
@@ -105,7 +105,7 @@ export default function AboutPage() {
                   Our services
                 </Link>
               </div>
-            </Reveal>
+            </div>
 
             <Reveal delay="d1">
               <div

@@ -11,8 +11,8 @@ const testimonials = [
         <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>bulletproof</em> — we closed the round on stronger terms because of it.
       </>
     ),
-    name: "Founder, Verified Client",
-    role: "Series A · Technology",
+    name: "Founder",
+    role: "Series A technology company · Verified client",
     initial: "M",
   },
   {
@@ -24,8 +24,8 @@ const testimonials = [
         <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>run themselves</em> and our board meetings are now about decisions — not reconciling numbers.
       </>
     ),
-    name: "CEO, Verified Client",
-    role: "Professional Services",
+    name: "Chief Executive",
+    role: "Professional services firm · Verified client",
     initial: "S",
   },
   {
@@ -37,8 +37,8 @@ const testimonials = [
         <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>frankly how I sleep.</em>
       </>
     ),
-    name: "Founder, Verified Client",
-    role: "D2C Retail",
+    name: "Founder",
+    role: "D2C retail business · Verified client",
     initial: "J",
   },
   {
@@ -50,8 +50,8 @@ const testimonials = [
         <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>Detailed, defensible,</em> and DreX walked our CFO through every assumption.
       </>
     ),
-    name: "COO, Verified Client",
-    role: "Healthcare Tech",
+    name: "Chief Operating Officer",
+    role: "Healthcare technology company · Verified client",
     initial: "A",
   },
 ];

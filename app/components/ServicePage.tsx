@@ -55,7 +55,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
           }}
         />
         <div className="max-w-[1280px] mx-auto px-5 md:px-8 relative z-[2]">
-          <Reveal>
+          <div>
             <span className="eyebrow">Service</span>
             <h1
               className="mt-[18px] mb-4"
@@ -92,7 +92,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
               <Link href="/contact" className="btn btn-primary">Book a call →</Link>
               <Link href="/for-firms" className="btn btn-ghost">Partner with us</Link>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
