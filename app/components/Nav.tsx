@@ -68,10 +68,10 @@ export default function Nav() {
             <Image
               src="/Logo2.png"
               alt="DreX"
-              width={180}
-              height={100}
+              width={120}
+              height={56}
               className="object-contain"
-              style={{ height: 100, width: "auto" }}
+              style={{ height: 56, width: "auto" }}
               priority
             />
           </Link>
@@ -196,7 +196,7 @@ export default function Nav() {
       <div
         className="lg:hidden fixed left-0 right-0 z-[99] overflow-hidden transition-all duration-300"
         style={{
-          top: 56,
+          top: 92,
           background: "rgba(11,30,63,.97)",
           backdropFilter: "blur(16px)",
           borderBottom: "1px solid rgba(255,255,255,.08)",

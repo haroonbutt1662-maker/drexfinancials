@@ -9,15 +9,6 @@ function ArrowIcon() {
   );
 }
 
-function HeroDot() {
-  return (
-    <span
-      className="w-[6px] h-[6px] rounded-full bg-[var(--champagne)] flex-shrink-0"
-      style={{ boxShadow: "0 0 12px var(--champagne)", animation: "pulse 2s infinite" }}
-    />
-  );
-}
-
 export default function Hero() {
   const particlesRef = useRef<HTMLDivElement>(null);
 
@@ -72,24 +63,17 @@ export default function Hero() {
       {/* Particles */}
       <div ref={particlesRef} className="absolute inset-0 pointer-events-none" />
 
-      {/* Content */}
-      <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-8 w-full pb-[140px] md:pb-[160px]">
-        <div
-          className="inline-flex items-center gap-3 px-4 py-2 rounded-full text-[var(--champagne-soft)] mb-8"
-          style={{
-            background: "rgba(212,165,116,.12)",
-            border: "1px solid rgba(212,165,116,.25)",
-            fontFamily: "var(--font-jetbrains-mono)",
-            fontSize: "0.7rem",
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-          }}
-        >
-          <HeroDot /> Dallas · London · Serving clients worldwide
-        </div>
+      {/* Content — pt clears the fixed nav (92 px) plus a 48 px buffer */}
+      <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-8 w-full pt-[140px] pb-[160px] md:pb-[180px]">
         <h1
-          className="font-semibold mb-7 max-w-[16ch]"
-          style={{ fontSize: "clamp(2.6rem, 5.8vw, 5.2rem)", lineHeight: 1.02, letterSpacing: "-0.04em", color: "var(--paper)" }}
+          className="font-semibold mb-7"
+          style={{
+            fontSize: "clamp(3rem, 6vw, 5.5rem)",
+            lineHeight: 1.02,
+            letterSpacing: "-0.04em",
+            color: "var(--paper)",
+            maxWidth: "14ch",
+          }}
         >
           Smarter financial <em className="not-italic text-[var(--champagne)]">leadership.</em>
           <br />Precise. Always engaged.
