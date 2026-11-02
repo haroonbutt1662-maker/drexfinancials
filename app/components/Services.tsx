@@ -4,44 +4,68 @@ import Reveal from "./Reveal";
 
 const services = [
   {
-    pos: 1,
-    num: "01 · Service",
+    pos: 1, num: "01 · Service",
     title: "Fractional CFO Services",
     desc: "Senior CFO leadership on a flexible basis. Board-ready reporting, strategic planning, and the calls only an experienced operator can make.",
-    style: { top: "4%", left: "50%", transform: "translateX(-50%)" },
+    slug: "fractional-cfo",
+    style: { top: "2%", left: "50%", transform: "translateX(-50%)" },
     delay: "orbit-float-d0",
   },
   {
-    pos: 2,
-    num: "02 · Service",
+    pos: 2, num: "02 · Service",
     title: "Accounting Services",
     desc: "Month-end close, management accounts, statutory compliance — handled with rigour and the responsiveness of a partner who knows your business.",
-    style: { top: "28%", right: "11%" },
+    slug: "accounting",
+    style: { top: "10%", right: "2%" },
     delay: "orbit-float-d1",
   },
   {
-    pos: 3,
-    num: "03 · Service",
-    title: "Strategic Financial Modelling",
-    desc: "Three-statement models, scenario forecasts, unit economics, and valuations — built to drive real decisions, not just live in a deck.",
-    style: { bottom: "11%", right: "22%" },
+    pos: 3, num: "03 · Service",
+    title: "Payables & Receivables",
+    desc: "Accurate, timely AP and AR management. Vendor payments, client invoicing and reconciliations handled end-to-end.",
+    slug: "payables-receivables",
+    style: { top: "50%", right: "0%", transform: "translateY(-50%)" },
     delay: "orbit-float-d2",
   },
   {
-    pos: 4,
-    num: "04 · Service",
-    title: "Audit Readiness",
-    desc: "From document trail to control framework, we prepare your business for audit calmly and confidently — a routine review, not a stressful event.",
-    style: { bottom: "11%", left: "22%" },
+    pos: 4, num: "04 · Service",
+    title: "Strategic Financial Modelling",
+    desc: "Three-statement models, scenario forecasts, unit economics and valuations — built to drive real decisions, not just live in a deck.",
+    slug: "financial-modeling",
+    style: { bottom: "10%", right: "2%" },
     delay: "orbit-float-d3",
   },
   {
-    pos: 5,
-    num: "05 · Service",
+    pos: 5, num: "05 · Service",
+    title: "Transaction Readiness",
+    desc: "Quality of earnings, data room build and investor-grade financial preparation for businesses heading into a transaction.",
+    slug: "transaction-readiness",
+    style: { bottom: "2%", left: "50%", transform: "translateX(-50%)" },
+    delay: "orbit-float-d4",
+  },
+  {
+    pos: 6, num: "06 · Service",
+    title: "Tax & Compliance",
+    desc: "Tax filings, regulatory deadlines and compliance reporting handled accurately and on time, so nothing falls through the cracks.",
+    slug: "tax-compliance",
+    style: { bottom: "10%", left: "2%" },
+    delay: "orbit-float-d5",
+  },
+  {
+    pos: 7, num: "07 · Service",
+    title: "Audit Readiness",
+    desc: "From document trail to control framework, we prepare your business for audit calmly and confidently — a routine review, not a stressful event.",
+    slug: "audit-readiness",
+    style: { top: "50%", left: "0%", transform: "translateY(-50%)" },
+    delay: "orbit-float-d6",
+  },
+  {
+    pos: 8, num: "08 · Service",
     title: "Financial Packages",
     desc: "Structured entry-level engagements for businesses not yet ready for full ongoing services. Fixed scope, fixed timeframe, high-impact result.",
-    style: { top: "28%", left: "11%" },
-    delay: "orbit-float-d4",
+    slug: "financial-packages",
+    style: { top: "10%", left: "2%" },
+    delay: "orbit-float-d7",
   },
 ];
 
@@ -87,15 +111,15 @@ export default function Services() {
           {/* Desktop orbit layout */}
           <div
             className="relative w-full mx-auto hidden lg:block"
-            style={{ maxWidth: 1100, aspectRatio: "1.2 / 1", minHeight: 600 }}
+            style={{ maxWidth: 1100, aspectRatio: "1.05 / 1", minHeight: 640 }}
           >
             {/* Glow */}
             <div className="orbit-glow" />
 
-            {/* SVG orbital lines */}
+            {/* SVG orbital lines — 8 spokes, ~45° apart */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
-              viewBox="0 0 1100 917"
+              viewBox="0 0 1100 1048"
               preserveAspectRatio="xMidYMid meet"
               aria-hidden="true"
             >
@@ -113,17 +137,24 @@ export default function Services() {
                   <path d="M0,1 L9,5 L0,9 Z" fill="#D4A574" />
                 </marker>
               </defs>
+              {/* center (550, 524), core r=105, line end r=300 */}
               <g fill="none" stroke="rgba(212,165,116,0.55)" strokeWidth="1.5" strokeDasharray="5 6">
-                {/* 01 — 90°  straight up   centre(550,458) r=105 */}
-                <line x1="550" y1="353" x2="550" y2="273" markerEnd="url(#orb-arr)" />
-                {/* 02 — 18°  upper-right */}
-                <line x1="650" y1="426" x2="726" y2="401" markerEnd="url(#orb-arr)" />
-                {/* 03 — -54° lower-right */}
-                <line x1="612" y1="543" x2="659" y2="608" markerEnd="url(#orb-arr)" />
-                {/* 04 — -126° lower-left */}
-                <line x1="488" y1="543" x2="441" y2="608" markerEnd="url(#orb-arr)" />
-                {/* 05 — 162° upper-left */}
-                <line x1="450" y1="426" x2="374" y2="401" markerEnd="url(#orb-arr)" />
+                {/* 01 — 90°  straight up */}
+                <line x1="550" y1="419" x2="550" y2="224" markerEnd="url(#orb-arr)" />
+                {/* 02 — 47°  upper-right */}
+                <line x1="622" y1="447" x2="755" y2="304" markerEnd="url(#orb-arr)" />
+                {/* 03 — 0°   right */}
+                <line x1="655" y1="524" x2="850" y2="524" markerEnd="url(#orb-arr)" />
+                {/* 04 — -47° lower-right */}
+                <line x1="622" y1="601" x2="755" y2="744" markerEnd="url(#orb-arr)" />
+                {/* 05 — -90° straight down */}
+                <line x1="550" y1="629" x2="550" y2="824" markerEnd="url(#orb-arr)" />
+                {/* 06 — -133° lower-left */}
+                <line x1="478" y1="601" x2="345" y2="744" markerEnd="url(#orb-arr)" />
+                {/* 07 — 180°  left */}
+                <line x1="445" y1="524" x2="250" y2="524" markerEnd="url(#orb-arr)" />
+                {/* 08 — 133°  upper-left */}
+                <line x1="478" y1="447" x2="345" y2="304" markerEnd="url(#orb-arr)" />
               </g>
             </svg>
 
@@ -164,13 +195,13 @@ export default function Services() {
                 style={svc.style}
               >
                 <article
-                  className={`orbit-svc-card orbit-float ${svc.delay} w-[250px] rounded-[18px] px-[22px] py-[22px] pb-5 backdrop-blur-sm cursor-pointer`}
+                  className={`orbit-svc-card orbit-float ${svc.delay} w-[210px] rounded-[18px] px-[18px] py-[18px] pb-[14px] backdrop-blur-sm cursor-pointer`}
                 >
                   <span
-                    className="block mb-[10px]"
+                    className="block mb-[8px]"
                     style={{
                       fontFamily: "var(--font-jetbrains-mono)",
-                      fontSize: "0.62rem",
+                      fontSize: "0.58rem",
                       letterSpacing: "0.22em",
                       color: "var(--champagne)",
                       textTransform: "uppercase",
@@ -179,11 +210,11 @@ export default function Services() {
                     {svc.num}
                   </span>
                   <h3
-                    className="mb-2"
+                    className="mb-[6px]"
                     style={{
                       fontFamily: "var(--font-manrope)",
                       fontWeight: 600,
-                      fontSize: "1.1rem",
+                      fontSize: "0.98rem",
                       letterSpacing: "-0.02em",
                       lineHeight: 1.2,
                       color: "var(--paper)",
@@ -191,7 +222,7 @@ export default function Services() {
                   >
                     {svc.title}
                   </h3>
-                  <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,.62)", lineHeight: 1.55 }}>
+                  <p style={{ fontSize: "0.76rem", color: "rgba(255,255,255,.60)", lineHeight: 1.5 }}>
                     {svc.desc}
                   </p>
                 </article>

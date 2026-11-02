@@ -256,6 +256,9 @@ body {
 .orbit-float-d2 { animation-delay: -2.2s; }
 .orbit-float-d3 { animation-delay: -3.3s; }
 .orbit-float-d4 { animation-delay: -4.4s; }
+.orbit-float-d5 { animation-delay: -5.5s; }
+.orbit-float-d6 { animation-delay: -0.6s; }
+.orbit-float-d7 { animation-delay: -1.7s; }
 
 /* ---- Orbit core spinning rings ---- */
 .orbit-core-ring-inner {
