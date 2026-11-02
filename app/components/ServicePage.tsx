@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ServiceData } from "@/app/content/services";
 import { services } from "@/app/content/services";
 import ServiceFAQ from "./ServiceFAQ";
-import ContactForm from "./ContactForm";
+
 import Reveal from "./Reveal";
 
 function CheckIcon() {
@@ -547,50 +547,67 @@ export default function ServicePage({ service }: { service: ServiceData }) {
         </section>
       )}
 
-      {/* ── 9. CTA + Contact form ── */}
+      {/* ── 9. CTA strip ── */}
       <section
-        id="contact"
-        className="relative overflow-hidden py-16 md:py-[100px]"
-        style={{ background: "var(--navy-900)", color: "var(--paper)" }}
+        className="relative overflow-hidden py-16 md:py-[80px]"
+        style={{ background: "var(--navy-900)" }}
       >
         <div
           className="absolute pointer-events-none"
           style={{
-            top: -200,
+            top: "50%",
             left: "50%",
-            transform: "translateX(-50%)",
-            width: 900,
-            height: 900,
+            transform: "translate(-50%, -50%)",
+            width: 800,
+            height: 400,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(212,165,116,.07), transparent 60%)",
+            background: "radial-gradient(ellipse, rgba(212,165,116,.07), transparent 65%)",
           }}
         />
         <div className="max-w-[1280px] mx-auto px-5 md:px-8 relative z-[2]">
-          <div className="grid grid-cols-1 md:grid-cols-[1.1fr_.9fr] gap-10 md:gap-16">
-            <Reveal>
-              <span className="eyebrow">Get started</span>
+          <Reveal className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
+            <div>
+              <span className="eyebrow block mb-[14px]">Ready to start?</span>
               <h2
-                className="mt-[18px] mb-5"
                 style={{
                   fontFamily: "var(--font-manrope)",
                   fontWeight: 600,
-                  fontSize: "clamp(2rem, 4vw, 3.2rem)",
-                  lineHeight: 1.05,
-                  letterSpacing: "-0.04em",
+                  fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.03em",
                   color: "var(--paper)",
+                  maxWidth: "32ch",
                 }}
               >
-                Let&apos;s talk about{" "}
-                <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>your numbers.</em>
+                Talk to us about{" "}
+                <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>
+                  {service.title.toLowerCase()}.
+                </em>
               </h2>
-              <p style={{ color: "rgba(255,255,255,.65)", fontSize: "1.02rem", lineHeight: 1.7, maxWidth: 480 }}>
+              <p
+                className="mt-3"
+                style={{ color: "rgba(255,255,255,.55)", fontSize: "0.96rem", lineHeight: 1.65 }}
+              >
                 We reply within one business day.
               </p>
-            </Reveal>
-            <Reveal delay="d1">
-              <ContactForm compact heading="" subheading="" />
-            </Reveal>
-          </div>
+            </div>
+            <div className="flex gap-3 flex-wrap flex-shrink-0">
+              <Link href="/contact" className="btn btn-primary">
+                Book a call →
+              </Link>
+              <Link
+                href="/services"
+                className="btn"
+                style={{
+                  background: "rgba(255,255,255,.07)",
+                  color: "var(--paper)",
+                  border: "1px solid rgba(255,255,255,.15)",
+                }}
+              >
+                All services
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
     </main>
