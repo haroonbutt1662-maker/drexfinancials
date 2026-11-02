@@ -85,7 +85,7 @@ export default function Hero() {
             textTransform: "uppercase",
           }}
         >
-          <HeroDot /> Available · London &amp; Worldwide
+          <HeroDot /> Dallas · London · Serving clients worldwide
         </div>
         <h1
           className="font-semibold mb-7 max-w-[16ch]"
@@ -95,17 +95,23 @@ export default function Hero() {
           <br />Automated. Always on.
         </h1>
         <p
-          className="mb-10 font-light"
+          className="mb-3 font-light"
           style={{ fontSize: "1.05rem", lineHeight: 1.65, maxWidth: 540, color: "rgba(255,255,255,.78)" }}
         >
-          DreX CFO combines senior-level financial expertise with intelligent automation — giving growing businesses real-time clarity, strategic insight, and measurable results, without the cost of a full-time CFO.
+          DreX combines senior financial judgment with AI-enabled delivery — giving growing businesses real-time clarity, strategic insight, and measurable results, without the cost of a full-time CFO.
+        </p>
+        <p
+          className="mb-10 font-light"
+          style={{ fontSize: "0.96rem", lineHeight: 1.65, maxWidth: 500, color: "rgba(255,255,255,.58)" }}
+        >
+          For growing businesses, and for the advisory firms that serve them.
         </p>
         <div className="flex gap-[14px] flex-wrap">
-          <a className="btn btn-primary" href="#contact">
+          <a className="btn btn-primary" href="/contact">
             Schedule a free consultation <ArrowIcon />
           </a>
-          <a className="btn btn-ghost" href="#services">
-            Explore services
+          <a className="btn btn-ghost" href="/for-firms">
+            Partner with us
           </a>
         </div>
       </div>
@@ -123,7 +129,7 @@ export default function Hero() {
         >
           {[
             { num: "100+", lbl: "Clients served" },
-            { num: "£40M+", lbl: "Revenue analysed" },
+            { num: "[CONFIRM: $50M+ or keep £40M+]", lbl: "Revenue analyzed" },
             { num: "100%", lbl: "5‑star satisfaction" },
           ].map((stat, i) => (
             <div key={i} className="px-9 text-center flex flex-col items-center relative">

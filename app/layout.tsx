@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Manrope, JetBrains_Mono } from "next/font/google";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -27,9 +29,16 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "DreX CFO — Smarter Finances. Automated Insights.",
+  title: {
+    default: "DreX | Senior Financial Leadership for Growing Businesses",
+    template: "%s | DreX",
+  },
   description:
-    "DreX CFO combines senior-level financial expertise with intelligent automation — giving growing businesses real-time clarity, strategic insight, and measurable results.",
+    "DreX pairs senior financial judgment with AI-enabled delivery. Fractional CFO, accounting, financial modeling, tax, and transaction readiness for growing businesses and advisory firms. Offices in Dallas and London.",
+  openGraph: {
+    siteName: "DreX",
+    images: [{ url: "/Logo2.png" }],
+  },
 };
 
 export default function RootLayout({
@@ -42,7 +51,11 @@ export default function RootLayout({
       lang="en"
       className={`${manrope.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Nav />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -7,7 +7,7 @@ const testimonials = [
     label: "Business Valuation",
     quote: (
       <>
-        Haroon delivered a valuation that held up under serious investor scrutiny. Calm, precise, and the model was{" "}
+        DreX delivered a valuation that held up under serious investor scrutiny. Calm, precise, and the model was{" "}
         <em className="not-italic font-medium" style={{ color: "var(--champagne)" }}>bulletproof</em> — we closed the round on stronger terms because of it.
       </>
     ),
@@ -56,8 +56,8 @@ const testimonials = [
   },
 ];
 
-// Triple the array so there's always content filling the track
-const track = [...testimonials, ...testimonials, ...testimonials];
+// Duplicate the array for seamless infinite scroll
+const track = [...testimonials, ...testimonials];
 
 export default function Testimonials() {
   const [paused, setPaused] = useState(false);
@@ -201,7 +201,7 @@ export default function Testimonials() {
 
       <style>{`
         @keyframes testi-scroll {
-          0%   { transform: translateX(-33.333%); }
+          0%   { transform: translateX(-50%); }
           100% { transform: translateX(0%); }
         }
       `}</style>

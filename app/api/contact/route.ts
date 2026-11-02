@@ -3,11 +3,19 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, company, email, message } = await req.json();
+    const { firstName, lastName, company, email, phone, industry, message, type } = await req.json();
 
-    if (!name?.trim() || !email?.trim()) {
+    const name = [firstName?.trim(), lastName?.trim()].filter(Boolean).join(" ") || firstName?.trim() || "";
+
+    if (!name || !email?.trim()) {
       return Response.json({ error: "Name and email are required." }, { status: 400 });
     }
+
+    const isFirm = type === "firm";
+    const toEmail = isFirm
+      ? "partners@drexfinancialadvisors.com"
+      : "hello@drexfinancialadvisors.com";
+    const subjectPrefix = isFirm ? "New firm enquiry" : "New consultation request";
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -17,35 +25,35 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    const row = (label: string, value: string) =>
+      value
+        ? `<tr>
+            <td style="padding:10px 0;border-bottom:1px solid #eee;width:120px;color:#5C6E89;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;">${label}</td>
+            <td style="padding:10px 0;border-bottom:1px solid #eee;font-weight:600;">${value}</td>
+           </tr>`
+        : "";
+
     await transporter.sendMail({
-      from: `"DreX CFO Website" <${process.env.GMAIL_USER}>`,
-      to: "Haroon1662@drexfinancialadvisors.com",
+      from: `"DreX Website" <${process.env.GMAIL_USER}>`,
+      to: toEmail,
       replyTo: email,
-      subject: `New consultation request — ${name}${company ? ` · ${company}` : ""}`,
+      subject: `${subjectPrefix} — ${name}${company ? ` · ${company}` : ""}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;color:#0B1E3F;">
-          <h2 style="margin-bottom:24px;">New consultation request</h2>
+          <h2 style="margin-bottom:24px;">${subjectPrefix}</h2>
           <table style="border-collapse:collapse;width:100%;">
-            <tr>
-              <td style="padding:10px 0;border-bottom:1px solid #eee;width:120px;color:#5C6E89;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;">Name</td>
-              <td style="padding:10px 0;border-bottom:1px solid #eee;font-weight:600;">${name}</td>
-            </tr>
-            ${company ? `
-            <tr>
-              <td style="padding:10px 0;border-bottom:1px solid #eee;color:#5C6E89;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;">Company</td>
-              <td style="padding:10px 0;border-bottom:1px solid #eee;font-weight:600;">${company}</td>
-            </tr>` : ""}
-            <tr>
-              <td style="padding:10px 0;border-bottom:1px solid #eee;color:#5C6E89;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;">Email</td>
-              <td style="padding:10px 0;border-bottom:1px solid #eee;"><a href="mailto:${email}" style="color:#4A7FB8;">${email}</a></td>
-            </tr>
-            ${message ? `
-            <tr>
+            ${row("Name", name)}
+            ${row("Email", `<a href="mailto:${email}" style="color:#4A7FB8;">${email}</a>`)}
+            ${row("Phone", phone || "")}
+            ${row("Company", company || "")}
+            ${row("Industry", industry || "")}
+            ${row("Type", isFirm ? "Advisory / Accounting Firm" : "Business")}
+            ${message ? `<tr>
               <td style="padding:10px 0;color:#5C6E89;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;vertical-align:top;">Message</td>
               <td style="padding:10px 0;line-height:1.6;">${message.replace(/\n/g, "<br>")}</td>
             </tr>` : ""}
           </table>
-          <p style="margin-top:32px;font-size:0.8rem;color:#9DB8D8;">Sent via drexcfo.com contact form</p>
+          <p style="margin-top:32px;font-size:0.8rem;color:#9DB8D8;">Sent via drexfinancialadvisors.com contact form</p>
         </div>
       `,
     });

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "./Reveal";
 
 const services = [
@@ -66,14 +67,19 @@ export default function Services() {
                 color: "var(--paper)",
               }}
             >
-              Five ways DreX CFO{" "}
+              Eight ways DreX{" "}
               <em className="not-italic" style={{ color: "var(--champagne)" }}>moves your numbers.</em>
             </h2>
           </Reveal>
           <Reveal delay="d1" className="hidden md:block">
-            <p style={{ color: "rgba(255,255,255,.65)", fontSize: "1.02rem", lineHeight: 1.7, maxWidth: 560 }}>
-              Each engagement applies across all industries — technology, retail, professional services, and beyond. Built modularly, so you take exactly what you need.
-            </p>
+            <div>
+              <p style={{ color: "rgba(255,255,255,.65)", fontSize: "1.02rem", lineHeight: 1.7, maxWidth: 560 }}>
+                Each engagement applies across all industries — technology, retail, professional services, and beyond. Built modularly, so you take exactly what you need.
+              </p>
+              <Link href="/services" className="btn btn-primary mt-5 inline-flex">
+                View all 8 services →
+              </Link>
+            </div>
           </Reveal>
         </div>
 
