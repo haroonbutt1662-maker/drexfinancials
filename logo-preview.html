@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DreX CFO — Logo Concept B</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;600;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #06152E;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 64px;
+      padding: 60px 40px;
+    }
+    .variant { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .label {
+      font-family: 'Courier New', monospace;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(212,165,116,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRIMARY — dark -->
+  <div class="variant">
+    <div class="label">Primary · Dark Background</div>
+    <svg viewBox="0 0 400 96" width="600" height="144" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Abstract mark: 3 ascending bars + rising trend line + arrowhead -->
+      <g transform="translate(16,14)">
+        <!-- Bar 1 (shortest) -->
+        <rect x="0"  y="44" width="12" height="26" rx="3" fill="#D4A574" opacity="0.35"/>
+        <!-- Bar 2 -->
+        <rect x="18" y="28" width="12" height="42" rx="3" fill="#D4A574" opacity="0.65"/>
+        <!-- Bar 3 (tallest) -->
+        <rect x="36" y="10" width="12" height="60" rx="3" fill="#D4A574"/>
+
+        <!-- Trend line (connects bar-top centres) -->
+        <polyline
+          points="6,42  24,26  42,8"
+          fill="none"
+          stroke="white"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.85"
+        />
+        <!-- Arrowhead -->
+        <polyline
+          points="35,10  42,8  40,15"
+          fill="none"
+          stroke="white"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.85"
+        />
+      </g>
+
+      <!-- Thin vertical separator -->
+      <rect x="84" y="16" width="1.5" height="64" rx="1" fill="#D4A574" opacity="0.22"/>
+
+      <!-- DreX wordmark -->
+      <text
+        x="98" y="63"
+        font-family="'Manrope', system-ui, sans-serif"
+        font-weight="800"
+        font-size="46"
+        fill="#FAFAF8"
+        letter-spacing="-2"
+      >DreX</text>
+
+      <!-- CFO -->
+      <text
+        x="236" y="61"
+        font-family="'Manrope', system-ui, sans-serif"
+        font-weight="300"
+        font-size="32"
+        fill="#D4A574"
+        letter-spacing="7"
+      >CFO</text>
+
+      <!-- Tagline -->
+      <text
+        x="99" y="80"
+        font-family="'Courier New', monospace"
+        font-size="8"
+        fill="#D4A574"
+        letter-spacing="4"
+        opacity="0.55"
+      >FRACTIONAL · STRATEGIC · FINANCIAL</text>
+
+    </svg>
+  </div>
+
+  <!-- ALTERNATE — light -->
+  <div class="variant">
+    <div class="label">Alternate · Light Background</div>
+    <svg viewBox="0 0 400 96" width="600" height="144" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="96" fill="#F4EFE6" rx="14"/>
+
+      <g transform="translate(16,14)">
+        <rect x="0"  y="44" width="12" height="26" rx="3" fill="#0B1F3A" opacity="0.3"/>
+        <rect x="18" y="28" width="12" height="42" rx="3" fill="#0B1F3A" opacity="0.6"/>
+        <rect x="36" y="10" width="12" height="60" rx="3" fill="#0B1F3A"/>
+        <polyline points="6,42  24,26  42,8" fill="none" stroke="#0B1F3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+        <polyline points="35,10  42,8  40,15" fill="none" stroke="#0B1F3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+      </g>
+
+      <rect x="84" y="16" width="1.5" height="64" rx="1" fill="#0B1F3A" opacity="0.18"/>
+
+      <text x="98" y="63" font-family="'Manrope', system-ui, sans-serif" font-weight="800" font-size="46" fill="#0B1F3A" letter-spacing="-2">DreX</text>
+      <text x="236" y="61" font-family="'Manrope', system-ui, sans-serif" font-weight="300" font-size="32" fill="#A07840" letter-spacing="7">CFO</text>
+      <text x="99" y="80" font-family="'Courier New', monospace" font-size="8" fill="#0B1F3A" letter-spacing="4" opacity="0.45">FRACTIONAL · STRATEGIC · FINANCIAL</text>
+    </svg>
+  </div>
+
+  <!-- MARK ONLY (icon) -->
+  <div class="variant">
+    <div class="label">Mark only · Icon / Favicon use</div>
+    <svg viewBox="0 0 72 72" width="144" height="144" xmlns="http://www.w3.org/2000/svg">
+      <rect width="72" height="72" rx="18" fill="#0B1F3A"/>
+      <g transform="translate(10,8)">
+        <rect x="0"  y="36" width="12" height="22" rx="3" fill="#D4A574" opacity="0.38"/>
+        <rect x="17" y="22" width="12" height="36" rx="3" fill="#D4A574" opacity="0.68"/>
+        <rect x="34" y="8"  width="12" height="50" rx="3" fill="#D4A574"/>
+        <polyline points="6,34  23,20  40,6" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+        <polyline points="33,8  40,6  38,13" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+      </g>
+    </svg>
+  </div>
+
+</body>
+</html>
