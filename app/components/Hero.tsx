@@ -73,7 +73,7 @@ export default function Hero() {
       <div ref={particlesRef} className="absolute inset-0 pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-8 w-full">
+      <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-8 w-full pb-[140px] md:pb-[160px]">
         <div
           className="inline-flex items-center gap-3 px-4 py-2 rounded-full text-[var(--champagne-soft)] mb-8"
           style={{
@@ -129,7 +129,7 @@ export default function Hero() {
         >
           {[
             { num: "100+", lbl: "Clients served" },
-            { num: "[CONFIRM: $50M+ or keep £40M+]", lbl: "Revenue analyzed" },
+            { num: "$50M+", lbl: "Revenue analyzed" },
             { num: "100%", lbl: "5‑star satisfaction" },
           ].map((stat, i) => (
             <div key={i} className="px-9 text-center flex flex-col items-center relative">
