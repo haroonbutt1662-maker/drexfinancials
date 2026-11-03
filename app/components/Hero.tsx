@@ -64,11 +64,11 @@ export default function Hero() {
       <div ref={particlesRef} className="absolute inset-0 pointer-events-none" />
 
       {/* Content — pt clears the fixed nav (92 px) plus a 48 px buffer */}
-      <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-8 w-full pt-[140px] pb-[160px] md:pb-[180px]">
+      <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-8 w-full pt-[196px] pb-[160px] md:pb-[180px]">
         <h1
           className="font-semibold mb-7"
           style={{
-            fontSize: "clamp(3rem, 6vw, 5.5rem)",
+            fontSize: "clamp(2.4rem, 4.5vw, 4rem)",
             lineHeight: 1.02,
             letterSpacing: "-0.04em",
             color: "var(--paper)",
