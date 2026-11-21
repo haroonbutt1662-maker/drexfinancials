@@ -16,15 +16,15 @@ const services = [
     title: "Accounting Services",
     desc: "Month-end close, management accounts, statutory compliance — handled with rigour and the responsiveness of a partner who knows your business.",
     slug: "accounting",
-    style: { top: "10%", right: "2%" },
+    style: { top: "26%", right: "10%" },
     delay: "orbit-float-d1",
   },
   {
     pos: 3, num: "03 · Service",
-    title: "Payables & Receivables",
-    desc: "Accurate, timely AP and AR management. Vendor payments, client invoicing and reconciliations handled end-to-end.",
-    slug: "payables-receivables",
-    style: { top: "50%", right: "0%", transform: "translateY(-50%)" },
+    title: "Tax & Compliance",
+    desc: "Tax filings, regulatory deadlines and compliance reporting handled accurately and on time, so nothing falls through the cracks.",
+    slug: "tax-compliance",
+    style: { bottom: "14%", right: "14%" },
     delay: "orbit-float-d2",
   },
   {
@@ -32,40 +32,16 @@ const services = [
     title: "Strategic Financial Modelling",
     desc: "Three-statement models, scenario forecasts, unit economics and valuations — built to drive real decisions, not just live in a deck.",
     slug: "financial-modeling",
-    style: { bottom: "10%", right: "2%" },
+    style: { bottom: "14%", left: "14%" },
     delay: "orbit-float-d3",
   },
   {
     pos: 5, num: "05 · Service",
-    title: "Transaction Readiness",
-    desc: "Quality of earnings, data room build and investor-grade financial preparation for businesses heading into a transaction.",
-    slug: "transaction-readiness",
-    style: { bottom: "2%", left: "50%", transform: "translateX(-50%)" },
-    delay: "orbit-float-d4",
-  },
-  {
-    pos: 6, num: "06 · Service",
-    title: "Tax & Compliance",
-    desc: "Tax filings, regulatory deadlines and compliance reporting handled accurately and on time, so nothing falls through the cracks.",
-    slug: "tax-compliance",
-    style: { bottom: "10%", left: "2%" },
-    delay: "orbit-float-d5",
-  },
-  {
-    pos: 7, num: "07 · Service",
-    title: "Audit Readiness",
-    desc: "From document trail to control framework, we prepare your business for audit calmly and confidently — a routine review, not a stressful event.",
-    slug: "audit-readiness",
-    style: { top: "50%", left: "0%", transform: "translateY(-50%)" },
-    delay: "orbit-float-d6",
-  },
-  {
-    pos: 8, num: "08 · Service",
     title: "Financial Packages",
     desc: "Structured entry-level engagements for businesses not yet ready for full ongoing services. Fixed scope, fixed timeframe, high-impact result.",
     slug: "financial-packages",
-    style: { top: "10%", left: "2%" },
-    delay: "orbit-float-d7",
+    style: { top: "26%", left: "10%" },
+    delay: "orbit-float-d4",
   },
 ];
 
@@ -101,7 +77,7 @@ export default function Services() {
                 Each engagement applies across all industries — technology, retail, professional services, and beyond. Built modularly, so you take exactly what you need.
               </p>
               <Link href="/services" className="btn btn-primary mt-5 inline-flex">
-                See all 8 services →
+                See all services →
               </Link>
             </div>
           </Reveal>
@@ -111,12 +87,12 @@ export default function Services() {
           {/* Desktop orbit layout */}
           <div
             className="relative w-full mx-auto hidden lg:block"
-            style={{ maxWidth: 1100, aspectRatio: "1.05 / 1", minHeight: 640 }}
+            style={{ maxWidth: 900, aspectRatio: "1.05 / 1", minHeight: 560 }}
           >
             {/* Glow */}
             <div className="orbit-glow" />
 
-            {/* SVG orbital lines — 8 spokes, ~45° apart */}
+            {/* SVG orbital lines — 5 spokes, 72° apart */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
               viewBox="0 0 1100 1048"
@@ -137,24 +113,18 @@ export default function Services() {
                   <path d="M0,1 L9,5 L0,9 Z" fill="#D4A574" />
                 </marker>
               </defs>
-              {/* center (550, 524), core r=105, line end r=300 */}
+              {/* center (550, 524), core r=105, line end r=240 — pentagon, 72° apart */}
               <g fill="none" stroke="rgba(212,165,116,0.55)" strokeWidth="1.5" strokeDasharray="5 6">
                 {/* 01 — 90°  straight up */}
-                <line x1="550" y1="419" x2="550" y2="224" markerEnd="url(#orb-arr)" />
-                {/* 02 — 47°  upper-right */}
-                <line x1="622" y1="447" x2="755" y2="304" markerEnd="url(#orb-arr)" />
-                {/* 03 — 0°   right */}
-                <line x1="655" y1="524" x2="850" y2="524" markerEnd="url(#orb-arr)" />
-                {/* 04 — -47° lower-right */}
-                <line x1="622" y1="601" x2="755" y2="744" markerEnd="url(#orb-arr)" />
-                {/* 05 — -90° straight down */}
-                <line x1="550" y1="629" x2="550" y2="824" markerEnd="url(#orb-arr)" />
-                {/* 06 — -133° lower-left */}
-                <line x1="478" y1="601" x2="345" y2="744" markerEnd="url(#orb-arr)" />
-                {/* 07 — 180°  left */}
-                <line x1="445" y1="524" x2="250" y2="524" markerEnd="url(#orb-arr)" />
-                {/* 08 — 133°  upper-left */}
-                <line x1="478" y1="447" x2="345" y2="304" markerEnd="url(#orb-arr)" />
+                <line x1="550" y1="419" x2="550" y2="284" markerEnd="url(#orb-arr)" />
+                {/* 02 — 18°  upper-right */}
+                <line x1="650" y1="492" x2="778" y2="450" markerEnd="url(#orb-arr)" />
+                {/* 03 — -54° lower-right */}
+                <line x1="612" y1="609" x2="691" y2="718" markerEnd="url(#orb-arr)" />
+                {/* 04 — -126° lower-left */}
+                <line x1="488" y1="609" x2="409" y2="718" markerEnd="url(#orb-arr)" />
+                {/* 05 — 162°  upper-left */}
+                <line x1="450" y1="492" x2="322" y2="450" markerEnd="url(#orb-arr)" />
               </g>
             </svg>
 

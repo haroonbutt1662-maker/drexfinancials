@@ -56,22 +56,22 @@ export default function Nav() {
   }
 
   const navBg = scrolled || menuOpen
-    ? "bg-[rgba(11,30,63,0.95)] backdrop-blur-[16px] border-b border-white/[0.06]"
-    : "bg-[rgba(6,21,46,0.35)] backdrop-blur-[8px] border-b border-white/[0.06]";
+    ? "bg-[rgba(11,30,63,0.75)] backdrop-blur-[16px]"
+    : "bg-transparent";
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 py-[18px] ${navBg}`}>
-        <div className="max-w-[1280px] mx-auto px-5 lg:px-8 flex items-center justify-between">
+      <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 overflow-visible ${navBg}`}>
+        <div className="max-w-[1280px] mx-auto px-5 lg:px-8 flex items-center justify-between h-[56px]">
           {/* Logo */}
           <Link href="/" className="flex items-center no-underline" aria-label="DreX home">
             <Image
               src="/Logo2.png"
               alt="DreX"
-              width={200}
-              height={120}
+              width={110}
+              height={70}
               className="object-contain"
-              style={{ height: 120, width: "auto" }}
+              style={{ height: 70, width: "auto" }}
               priority
             />
           </Link>
@@ -196,7 +196,7 @@ export default function Nav() {
       <div
         className="lg:hidden fixed left-0 right-0 z-[99] overflow-hidden transition-all duration-300"
         style={{
-          top: 156,
+          top: 56,
           background: "rgba(11,30,63,.97)",
           backdropFilter: "blur(16px)",
           borderBottom: "1px solid rgba(255,255,255,.08)",
